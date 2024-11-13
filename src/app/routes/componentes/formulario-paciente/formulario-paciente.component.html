@@ -1,0 +1,470 @@
+<mat-card class="global-card">
+    <mat-card-header>
+        <mat-card-title>Historia Clínica SIIS 777 </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <mat-stepper>
+            <mat-step label="Datos generales" state="accessibility_new">
+                <form class="form-field-full">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img style="width: 150px; height: 150px; text-align: center; border-radius: 100%; text-transform: uppercase; border-color: rgb(11, 10, 10); background-color: rgba(161, 157, 161, 0.559); font: 66px / 200px Helvetica, Arial, sans-serif;"
+                                 src="{{img}}" alt="" size="50">
+                            <label class="cameraButton">SUBIR IMAGEN
+                                <input type="file" id="file" (change)="handleFileInput($event)"
+                                       accept="image/*;capture=camera">
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo de paciente</mat-label>
+                                <input matInput type="text" placeholder="Tipo de paciente"
+                                       name="tipoPaciente"
+                                       [(ngModel)]="data.tipoPaciente">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Historia clinica SICE</mat-label>
+                                <input matInput type="text" placeholder="Historia clinica SICE"
+                                       name="sice"
+                                       [(ngModel)]="data.sice">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>C.I.</mat-label>
+                                <input matInput type="text" placeholder="C.I." name="ci"
+                                       [(ngModel)]="data.ci">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Duplicado</mat-label>
+                                        <input matInput type="text" placeholder="Duplicado"
+                                               name="duplicado"
+                                               [(ngModel)]="data.duplicado">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Expedido</mat-label>
+                                        <mat-select matInput [(ngModel)]="data.expedido"
+                                                    [ngModelOptions]="{standalone: true}">
+                                            <mat-option [value]="2">LA PAZ</mat-option>
+                                            <mat-option [value]="3">COCHABAMBA</mat-option>
+                                            <mat-option [value]="7">SANTA CRUZ</mat-option>
+                                            <mat-option [value]="1">CHUQUISACA</mat-option>
+                                            <mat-option [value]="6">TARIJA</mat-option>
+                                            <mat-option [value]="5">POTOSI</mat-option>
+                                            <mat-option [value]="4">ORURO</mat-option>
+                                            <mat-option [value]="8">BENI</mat-option>
+                                            <mat-option [value]="9">PANDO</mat-option>
+                                            <mat-option [value]="10">OTRO</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput type="date" placeholder="Fecha de nacimiento"
+                                       name="fecha_nac"
+                                       [(ngModel)]="data.fecha_nac">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Edad</mat-label>
+                                <input matInput type="text" placeholder="Edad" name="edad"
+                                       [(ngModel)]="data.edad">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombres</mat-label>
+                                <input matInput type="text" placeholder="Nombres" name="nombre"
+                                       [(ngModel)]="data.nombre">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Primer apellido</mat-label>
+                                <input matInput type="text" placeholder="Primer apellido"
+                                       name="primer_apellido"
+                                       [(ngModel)]="data.primer_apellido">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Segundo apellido</mat-label>
+                                <input matInput type="text" placeholder="Segundo apellido"
+                                       name="segundo_apellido"
+                                       [(ngModel)]="data.segundo_apellido">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Genero</mat-label>
+                                <mat-select matInput [(ngModel)]="data.genero"
+                                            [ngModelOptions]="{standalone: true}">
+                                    <mat-option [value]="1">MASCULINO</mat-option>
+                                    <mat-option [value]="2">FEMENINO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nacionalidad</mat-label>
+                                <input matInput type="text" placeholder="Nacionalidad"
+                                       name="nacionalidad"
+                                       [(ngModel)]="data.nacionalidad">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Lugar nacimiento</mat-label>
+                                <mat-select matInput [(ngModel)]="data.lugar_nac"
+                                            [ngModelOptions]="{standalone: true}">
+                                    <mat-option [value]="2">LA PAZ</mat-option>
+                                    <mat-option [value]="3">COCHABAMBA</mat-option>
+                                    <mat-option [value]="7">SANTA CRUZ</mat-option>
+                                    <mat-option [value]="1">CHUQUISACA</mat-option>
+                                    <mat-option [value]="6">TARIJA</mat-option>
+                                    <mat-option [value]="5">POTOSI</mat-option>
+                                    <mat-option [value]="4">ORURO</mat-option>
+                                    <mat-option [value]="8">BENI</mat-option>
+                                    <mat-option [value]="9">PANDO</mat-option>
+                                    <mat-option [value]="10">OTRO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Provincia</mat-label>
+                                <input matInput type="text" placeholder="Provincia" name="provincia"
+                                       [(ngModel)]="data.provincia">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Municipio</mat-label>
+                                <input matInput type="text" placeholder="Municipio" name="municipio"
+                                       [(ngModel)]="data.municipio">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Estado civil</mat-label>
+                                <mat-select matInput [(ngModel)]="data.estado_civil"
+                                            [ngModelOptions]="{standalone: true}">
+                                    <mat-option [value]="">seleccione</mat-option>
+                                    <mat-option [value]="1">Soltero/a</mat-option>
+                                    <mat-option [value]="2">Casado/a</mat-option>
+                                    <mat-option [value]="3">Divorciado/a</mat-option>
+                                    <mat-option [value]="4">Viudo/a</mat-option>
+                                    <mat-option [value]="5">Unión Libre</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput type="text" placeholder="Teléfono" name="telefono"
+                                       [(ngModel)]="data.telefono">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Celular</mat-label>
+                                <input matInput type="text" placeholder="Celular" name="celular"
+                                       [(ngModel)]="data.celular">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Correo</mat-label>
+                                <input matInput type="email" placeholder="ejemplo@correo.com"
+                                       name="email"
+                                       [(ngModel)]="data.email" required>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Profesión</mat-label>
+                                <input matInput type="text" placeholder="Profesión" name="profesion"
+                                       [(ngModel)]="data.profesion">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Dirección</mat-label>
+                                <textarea matInput type="text" placeholder="Dirección"
+                                          name="direccion"
+                                          [(ngModel)]="data.direccion"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Idioma nativo</mat-label>
+                                <input matInput type="text" placeholder="Idioma nativo"
+                                       name="idiomaNativo"
+                                       [(ngModel)]="data.idiomaNativo">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Observaciones</mat-label>
+                                <input matInput type="text" placeholder="Observaciones"
+                                       name="observaciones"
+                                       [(ngModel)]="data.observaciones">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Departamento</mat-label>
+                                <input matInput type="text" placeholder="Departamento"
+                                       name="departamentoDP"
+                                       [(ngModel)]="data.departamentoDP">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Provincia</mat-label>
+                                <input matInput type="text" placeholder="Provincia" name="provincia"
+                                       [(ngModel)]="data.provincia">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Municipio</mat-label>
+                                <input matInput type="text" placeholder="Municipio"
+                                       name="municipioDP"
+                                       [(ngModel)]="data.municipioDP">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zona</mat-label>
+                                <input matInput type="text" placeholder="Zona" name="zonaDP"
+                                       [(ngModel)]="data.zonaDP">
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+                </form>
+                <div>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+            <mat-step label="Datos laborales" state="accessibility_new" optional>
+                <form class="form-field-full">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Lugar</mat-label>
+                                <input matInput type="text" placeholder="Lugar"
+                                       name="lugar"
+                                       [(ngModel)]="data.lugar">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Direccion laboral</mat-label>
+                                <input matInput type="text" placeholder="Direccion laboral"
+                                       name="dirLaboral"
+                                       [(ngModel)]="data.dirLaboral">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Telefono laboral</mat-label>
+                                <input matInput type="text" placeholder="Telefono laboral"
+                                       name="telLaboral"
+                                       [(ngModel)]="data.telLaboral">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <button mat-button matStepperPrevious>Anterior</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+            <mat-step label="Referencias familiares" state="accessibility_new" optional>
+                <form class="form-field-full">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Responsable de familia</mat-label>
+                                <input matInput type="text" placeholder="Responsable de familia"
+                                       name="respFamilia"
+                                       [(ngModel)]="data.respFamilia">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Padre tutor(a)</mat-label>
+                                <input matInput type="text" placeholder="Padre tutor(a)"
+                                       name="padreTutor"
+                                       [(ngModel)]="data.padreTutor">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre madre</mat-label>
+                                <input matInput type="text" placeholder="Nombre madre"
+                                       name="nombreMadre"
+                                       [(ngModel)]="data.nombreMadre">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Telefono referencia</mat-label>
+                                <input matInput type="text" placeholder="Telefono referencia"
+                                       name="telReferencia"
+                                       [(ngModel)]="data.telReferencia">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Conyuge</mat-label>
+                                <input matInput type="text" placeholder="Conyuge"
+                                       name="conyuge"
+                                       [(ngModel)]="data.conyuge">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Otros</mat-label>
+                                <input matInput type="text" placeholder="Otros"
+                                       name="otros"
+                                       [(ngModel)]="data.otros">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <button mat-button matStepperPrevious>Anterior</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </mat-step>
+            <mat-step label="Datos de personas mas proxima" optional>
+                <form class="form-field-full">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre del acompañante</mat-label>
+                                <input matInput type="text" placeholder="Nombre del acompañante"
+                                       name="nombreAcomp"
+                                       [(ngModel)]="data.nombreAcomp">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Relacion</mat-label>
+                                <input matInput type="text" placeholder="Relacion"
+                                       name="relacion"
+                                       [(ngModel)]="data.relacion">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ciudad</mat-label>
+                                <input matInput type="text" placeholder="Ciudad"
+                                       name="cuidadAcomp"
+                                       [(ngModel)]="data.cuidadAcomp">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zona</mat-label>
+                                <input matInput type="text" placeholder="Zona"
+                                       name="zonaAcomp"
+                                       [(ngModel)]="data.zonaAcomp">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Direccion</mat-label>
+                                <input matInput type="text" placeholder="Direccion"
+                                       name="dirAcomp"
+                                       [(ngModel)]="data.dirAcomp">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Telefono</mat-label>
+                                <input matInput type="text" placeholder="Telefono"
+                                       name="telefonoAcomp"
+                                       [(ngModel)]="data.telefonoAcomp">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <button mat-button matStepperPrevious>Anterior</button>
+                </div>
+            </mat-step>
+
+            <!-- Icon overrides. -->
+            <ng-template matStepperIcon="accessibility_new">
+                <mat-icon>accessibility_new</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="accessibility_new">
+                <mat-icon>accessibility_new</mat-icon>
+            </ng-template>
+            <ng-template matStepperIcon="accessibility_new">
+                <mat-icon>accessibility_new</mat-icon>
+            </ng-template>
+        </mat-stepper>
+
+
+
+
+
+        <div class="d-flex justify-content-end m-t-8">
+
+            <button mat-fab extended (click)="funcionCancelar()" class="btn-style">
+                <mat-icon class="iconos-blancos">reply_all</mat-icon>
+                Cancelar
+            </button>
+            <button mat-fab extended (click)="funcionGuardar()" class="btn-style">
+                <mat-icon class="iconos-blancos">save</mat-icon>
+                Guardar
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

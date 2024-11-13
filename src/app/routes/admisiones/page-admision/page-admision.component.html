@@ -1,0 +1,384 @@
+<div class="row">
+    <button mat-fab class=" classbutton">
+        <mat-icon class="indicador" matSuffix>assignment</mat-icon>
+    </button>
+    <div>
+        <strong>&nbsp;&nbsp;Admisiones</strong>
+        <p>&nbsp;&nbsp;Registro de pacientes que acuden al hospital para asignarles una ficha</p>
+    </div>
+</div>
+
+<div *ngIf="opciones == 'atencionFichas' " class="row">
+    <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12">
+            <mat-card class="global-card" (click)="funcionAtenderFichasEM()">
+                <mat-card-header>
+                    <mat-card-title>ATENDER</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <img class="imgTipo" src="images/opEmergencias.png" width="100%" />
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="global-card" (click)="funcionAtenderFichasHE()">
+                <mat-card-header>
+                    <mat-card-title>ATENDER</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <img class="imgTipo" src="images/hemodialisis.png" width="100%" />
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-9">
+        <mat-card class="global-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="row">
+                        <div class="col-md-10">
+                            Fichas de consulta externa
+                        </div>
+                        <div class="col-md-2">
+                            <button mat-fab class="button-blanco">
+                                <mat-icon class="indicador btn">loop</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="mat-elevation-z8 table-container">
+                    <mat-table mat-table [dataSource]="dataSource" class="container" matSort>
+                        <ng-container matColumnDef="position">
+                            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.position}}
+
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef> FECHA DE ATENCION </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="weight">
+                            <mat-header-cell *matHeaderCellDef> SERVICIO </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="symbol">
+                            <mat-header-cell *matHeaderCellDef> CÓDIGO DE FICHA </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.symbol}}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <button mat-fab class="button-blanco-circular"
+                                        (click)="funcionBuscarPaciente(element)">
+                                    <mat-icon class="indicador">assignment_turned_in</mat-icon>
+                                </button>
+
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="opciones == 'busquedaPacientes' ">
+    <mat-card class="global-card" *ngIf="tipoAtencion == 'CE' ">
+        <mat-card-content>
+            <form>
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                        <div class="ficha">
+                            Ficha Código: AD - 002
+                        </div>
+                    </div>
+                    <div class="row col-md-8">
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular">
+                                <mat-icon class="indicador btn">how_to_reg</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">Finalizar</strong>
+                        </div>
+
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular">
+                                <mat-icon class="indicador btn">loop</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">Rellamado</strong>
+                        </div>
+
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular"
+                                    (click)="funcionPendienteFicha()">
+                                <mat-icon class="indicador btn">reply_all</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">Pendiente</strong>
+                        </div>
+
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular">
+                                <mat-icon class="indicador btn">delete_sweep</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">No vino</strong>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="global-card" *ngIf="tipoAtencion == 'EM' ">
+        <mat-card-content>
+            <form>
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                        <div class="ficha">
+                            Atención emergencias
+                        </div>
+                    </div>
+                    <div class="row col-md-8">
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular"
+                                    (click)="funcionPendienteFicha()">
+                                <mat-icon class="indicador btn">reply_all</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">Volver</strong>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="global-card" *ngIf="tipoAtencion == 'HE' ">
+        <mat-card-content>
+            <form>
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                        <div class="ficha">
+                            Atención hemodialisis
+                        </div>
+                    </div>
+                    <div class="row col-md-8">
+                        <div class="flex-col">
+                            <button mat-fab class="button-blanco-circular"
+                                    (click)="funcionPendienteFicha()">
+                                <mat-icon class="indicador btn">reply_all</mat-icon>
+                            </button>
+                            <br>
+                            <strong class="txtLlamado">Volver</strong>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="global-card">
+        <mat-card-content>
+            <app-buscador-pacientes (retornar)="funcionRegresar($event)"
+                                    (pacienteSeleccionado)="funcionRecuperarDatos($event)"></app-buscador-pacientes>
+
+            <div class="d-flex justify-content-end m-t-8">
+                <div class="example-button-container">
+                    <button mat-fab extended class="button-blanco"
+                            (click)="funcionCrearNuevoPaciente()">
+                        <mat-icon class="indicador">create_new_folder</mat-icon>
+                        Nuevo
+                    </button>
+                </div>
+                &nbsp;&nbsp;
+                <div class="example-button-container">
+                    <button mat-fab extended class="button-blanco"
+                            (click)="funcionLimpiarBusqueda()">
+                        <mat-icon class="indicador">delete_sweep</mat-icon>
+                        Limpiar
+                    </button>
+                </div>
+            </div>
+            <br>
+            @if (dataSource2.length > 0) {
+            <mat-table [dataSource]="dataSource2" class="mat-elevation-z1 table-container">
+                <ng-container matColumnDef="dtspsl_ci">
+                    <mat-header-cell *matHeaderCellDef> Cedula de identidad </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_ci}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_nombres">
+                    <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_nombres}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_paterno">
+                    <mat-header-cell *matHeaderCellDef> Primer apellido </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_paterno}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_materno">
+                    <mat-header-cell *matHeaderCellDef> Segundo apellido </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_materno}}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button mat-fab class="button-blanco-circular"
+                                (click)="funcionRealizarAtencion(element)">
+                            <mat-icon class="indicador btn">assignment_turned_in</mat-icon>
+                        </button>
+                        <button mat-fab class="button-blanco-circular"
+                                (click)="funcionRealizarAtencion(element)">
+                            <mat-icon class="indicador btn">assignment_turned_in</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+            </mat-table>
+            }
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<div *ngIf="opciones == 'datosPersonales' ">
+    <app-formulario-paciente (retornar)="funcionRegresar($event)"
+                             (guardarDatos)="funcionReservarFicha($event)"
+                             [dataPaciente]="dataPaciente"></app-formulario-paciente>
+</div>
+
+@if(opciones == 'reservarServicio'){
+<div>
+    <div class="row">
+        <div [class]="classStyleIinf">
+            @if(tamanioForm == 'S'){
+            <app-datos-paciente [tipoVista]="'S'"></app-datos-paciente>
+            }
+            @if(tamanioForm == 'M'){
+            <app-datos-paciente [tipoVista]="'M'"></app-datos-paciente>
+            }
+        </div>
+
+        <div [class]="classStyleRes">
+            @if(opcionesReserva == 'mostrarServicios'){
+            <mat-card class="global-card">
+                <mat-card-content>
+                    <div class="header-menu-style">
+                        <h2 class="component-header">Seleccione un Servicio</h2>
+                        <button class="component-header" mat-icon-button [matMenuTriggerFor]="menu"
+                                aria-label="Example icon-button with a menu">
+                            <mat-icon class="mat-icon-color">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="funcionVolverBusqueda()">
+                                <mat-icon class="mat-icon-color btn">reply_all</mat-icon>
+                                <span>Volver</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                    <br>
+                    <div class="row">
+                        @if(tipoAtencion == 'CE'){
+                        <div class="col-md-5" (click)="funcionMostrarEspecialidades()">
+                            <mat-card class="especialidad-card">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="imgTipoReserva" mat-card-image
+                                                 src="images/consultaExterna.png">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 class="txtTipo">CONSULTA EXTERNA</h2>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        }
+                        @if(tipoAtencion == 'EM'){
+                        <div class="col-md-5">
+                            <mat-card class="especialidad-card">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="imgTipoReserva" mat-card-image
+                                                 src="images/emergencias.png">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 class="txtTipo">EMERGENCIAS</h2>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        }
+                        @if(tipoAtencion == 'HE'){
+                        <div class="col-md-5">
+                            <mat-card class="especialidad-card">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="imgTipoReserva" mat-card-image
+                                                 src="images/consultaExterna.png">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 class="txtTipo">HEMODIALISIS</h2>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        }
+                        @if(tipoAtencion == 'CE'){
+                        <div class="col-md-6">
+                            <mat-card class="especialidad-card">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="imgTipoReserva" mat-card-image
+                                                 src="images/serviciosComplementarios.png">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 class="txtTipo">SERVICIOS COMPLEMENTARIOS</h2>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        }
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            }
+            @if(opcionesReserva == 'mostrarEspecialidades'){
+            <mat-card class="global-card">
+                <mat-card-content>
+                    <div class="header-menu-style">
+                        <h2 class="component-header">Seleccione un Servicio</h2>
+                        <button class="component-header" mat-icon-button [matMenuTriggerFor]="menu"
+                                aria-label="Example icon-button with a menu">
+                            <mat-icon class="mat-icon-color">clear</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="funcionVolverServicios()">
+                                <mat-icon class="mat-icon-color btn">reply_all</mat-icon>
+                                <span>Volver</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                    <app-reservar-ficha></app-reservar-ficha>
+                </mat-card-content>
+            </mat-card>
+            }
+        </div>
+
+
+    </div>
+</div>
+}

@@ -1,0 +1,201 @@
+<mat-card [class]="tipoConsumo">
+    <mat-card-content>
+        <div class="header-menu-style">
+            <h2 class="component-header">Signos Vitales</h2>
+            <div class="component-header">
+                @if (tipoConsumo != 'LECTURA') {
+                <button mat-icon-button [matMenuTriggerFor]="menu"
+                        aria-label="Example icon-button with a menu">
+                    <mat-icon class="mat-icon-color">clear</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="funcionRetornar();">
+                        <mat-icon class="mat-icon-color btn">reply_all</mat-icon>
+                        <span>Volver</span>
+                    </button>
+                </mat-menu>
+                }
+            </div>
+        </div>
+
+        <form class="form-field-full">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Estado de Indice de masa muscular del Paciente (IMC)</h3>
+                    <div class="col-md-12 row">
+                        <div class="col-md-8">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Peso (Kilogramos):</mat-label>
+                                <input matInput [(ngModel)]="signosVitales.peso"
+                                       [ngModelOptions]="{standalone: true}" type="text"
+                                       id="myInputId1" #SelectOcular (keyup)="changeIMC()"
+                                       [readonly]="edicion">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Altura (Metros) :</mat-label>
+                                <input matInput [(ngModel)]="signosVitales.altura"
+                                       [ngModelOptions]="{standalone: true}" type="text"
+                                       id="myInputId" #SelecVerbal (keyup)="changeIMC()"
+                                       [readonly]="edicion">
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>IMC :</mat-label><strong>
+                                    <input type="text" matInput [(ngModel)]="signosVitales.IMC"
+                                           [ngModelOptions]="{standalone: true}"
+                                           name="IMC" readonly>
+                                </strong>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md-3">
+                                <img style=" width: 120px;" [class]="classSilueta"
+                                     src="images/imagesIMC/{{silueta}}" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <h3>Estado de Temperatura del Paciente</h3>
+                    <div class="col-md-12 row">
+                        <div class="col-md-7">
+                            <mat-radio-group (change)="funcionSeleccionTemperatura($event)"
+                                             id="temperaturaSignosVitales1"
+                                             name="temperaturaSignosVitales1"
+                                             [(ngModel)]="signosVitales.temperaturaSignosVitales1">
+                                <mat-radio-button style="padding: 15px;" value="1"
+                                                  [disabled]="edicion">Temperaturaº
+                                    axilar</mat-radio-button>
+                                <mat-radio-button style="padding: 15px;" value="2"
+                                                  [disabled]="edicion">Temperaturaº
+                                    Rectal</mat-radio-button>
+                                <mat-radio-button style="padding: 15px;" value="3"
+                                                  [disabled]="edicion">Temperaturaº
+                                    Oral</mat-radio-button>
+                                <mat-radio-button style="padding: 15px;" value="4"
+                                                  [disabled]="edicion">Temperaturaº
+                                    Auricular</mat-radio-button>
+                            </mat-radio-group>
+
+                            <mat-form-field style="padding: 10px;" class="example-full-width"
+                                            appearance="outline">
+                                <mat-label>Temperatura :</mat-label>
+                                <input matInput type="number"
+                                       [(ngModel)]="signosVitales.temperatura"
+                                       [ngModelOptions]="{standalone: true}"
+                                       value="-2" min="-2" max="95"
+                                       (keyup)="funcionEstadoTemperatura()" [disabled]="isDisabled"
+                                       [readonly]="edicion">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="temperatura-container">
+                                <div class="temperatura-inv"
+                                     [@grow2]="{value: valueState,params: {temperaturaHeight: 100-temperaturaHeight}}">
+                                </div>
+                                <div class="temperatura"
+                                     [@grow]="{value: valueState,params: {temperaturaHeight: 1-temperaturaHeight}}">
+                                </div>
+                                <div
+                                     style="width: 15px;height: 15px; background-color: rgb(97, 97, 97);border-radius: 15px; margin: 0px auto;">
+                                </div>
+                            </div>
+                            <strong>
+                                {{estadoTemperatura}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    &nbsp;
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Frecuencia Cardiaca (l/m) :</mat-label>
+                        <input matInput type="text" [(ngModel)]="signosVitales.frecuencia_cardiaca"
+                               [ngModelOptions]="{standalone: true}" value=""
+                               (keyup)="funcionFrecuenciaCardiaca(signosVitales.frecuencia_cardiaca)"
+                               [readonly]="edicion">
+                    </mat-form-field>
+                    <strong>
+                        {{estadoFrecuenciaCardiaca}}
+                    </strong>
+                </div>
+                <div class="col-md-4">
+                    &nbsp;
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Presión Arterial (mmHg) (sistólica/diastólica) :</mat-label>
+                        <input matInput type="text" [(ngModel)]="signosVitales.presion_arterial"
+                               [ngModelOptions]="{standalone: true}" value=""
+                               (keyup)="funcionPresionArterial(signosVitales.presion_arterial)"
+                               [readonly]="edicion">
+                    </mat-form-field>
+                    @if (estadoPresionArterial == 'Presión no válida.') {
+                    <strong style="color: red;">
+                        {{estadoPresionArterial}}
+                    </strong>
+                    }
+                    @if (estadoPresionArterial != 'Presión no válida.') {
+                    <strong>
+                        {{estadoPresionArterial}}
+                    </strong>
+                    }
+                </div>
+                <div class="col-md-4">
+                    &nbsp;
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Frecuencia Respiratoria (r/m) :</mat-label>
+                        <input matInput type="text"
+                               [(ngModel)]="signosVitales.frecuencia_respiratoria"
+                               [ngModelOptions]="{standalone: true}" value=""
+                               (keyup)="funcionFrecuenciaRespiratoria(signosVitales.frecuencia_respiratoria)"
+                               [readonly]="edicion">
+                    </mat-form-field>
+                    <strong>
+                        {{estadoFrecuenciaRespiratoria}}
+                    </strong>
+                </div>
+                <div class="col-md-4">
+                    &nbsp;
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Saturación de Oxígeno (O2) :</mat-label>
+                        <input matInput type="text" [(ngModel)]="signosVitales.saturacion_oxigeno"
+                               [ngModelOptions]="{standalone: true}" value=""
+                               (keyup)="funcionSaturacionOxigeno(signosVitales.saturacion_oxigeno)"
+                               [readonly]="edicion">
+                    </mat-form-field>
+                    <strong>
+                        {{estadoSaturacionOxigeno}}
+                    </strong>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </form>
+
+        <div class="header-menu-style">
+            <div class="component-header">
+            </div>
+            <div class="component-header">
+                @if (tipoConsumo != 'LECTURA') {
+                <button mat-fab extended class="btn-style" (click)="funcionRetornar();">
+                    <mat-icon class="iconos-blancos">reply_all</mat-icon>
+                    Cancelar
+                </button>
+                }
+                @if (!edicion) {
+                <button mat-fab extended class="btn-style">
+                    <mat-icon class="iconos-blancos">save</mat-icon>
+                    Guardar
+                </button>
+                }
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

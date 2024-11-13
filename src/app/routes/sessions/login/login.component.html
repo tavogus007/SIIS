@@ -1,0 +1,167 @@
+<!--div class="d-flex w-full h-full">
+  <mat-card class="m-auto" style="max-width: 380px;">
+    <mat-card-header class="m-b-24">
+      <mat-card-title>👋 {{'login_title' | translate}}!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="form-field-full" [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'username' | translate}}: ng-matero</mat-label>
+          <input matInput placeholder="ng-matero" formControlName="username" required>
+          @if (username.invalid) {
+            <mat-error>
+              @if (username.errors?.required) {
+                <span>{{'please_enter' | translate}}
+                  <strong>ng-matero</strong>
+                </span>
+              }
+              @if (username.errors?.remote) {
+                <span>{{ username.errors?.remote }}</span>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{'password' | translate}}: ng-matero</mat-label>
+          <input matInput placeholder="ng-matero" type="password"
+            formControlName="password" required>
+          @if (password.invalid) {
+            <mat-error>
+              @if (password.errors?.required) {
+                <span>{{'please_enter' | translate}}
+                  <strong>ng-matero</strong>
+                </span>
+              }
+              @if (password.errors?.remote) {
+                <span>{{ password.errors?.remote }}</span>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-checkbox formControlName="rememberMe">{{'remember_me' | translate}}</mat-checkbox>
+
+        <button class="w-full m-y-16" mat-flat-button [disabled]="!!loginForm.invalid"
+          [loading]="isSubmitting" (click)="loginAdministracion()">{{'login' | translate}}</button>
+
+        <div>
+          <span>{{'have_no_account' | translate}}? </span>
+          <a routerLink="/auth/register">{{'create_one_account' | translate}}</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div-->
+
+
+
+
+
+
+
+
+
+
+
+<!--div class="login-container d-flex w-full h-full">
+  <div class="main-login">
+    <div class="logo-gamlp">
+      <img src="./assets/images/logo_gamlp2022-145x56.png">
+    </div>
+    <div class="d-flex w-full h-full">
+      <div class="m-auto" style="max-width: 380px;">
+        <mat-card-header style="text-align: center;" class="m-b-24 card-header-login">
+          <mat-card-title>
+            <img src="../../../../assets/images/ecoSitram.png" class="matero-avatar" width="250" alt="avatar"> 
+            <div class="text-font-inicio-session">Iniciar sesión</div>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="form-field-full" [formGroup]="loginForm">
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label><mat-icon>person</mat-icon> Ingresar usuario</mat-label>
+              <input matInput placeholder="Usuario" formControlName="username">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label><mat-icon>person</mat-icon> Ingrese contraseña</mat-label>
+              <input matInput placeholder="Contraseña" type="password" formControlName="password"
+                [type]="hide ? 'password' : 'text'" (keydown.enter)="$event.preventDefault(); loginAdministracion()">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon class = "btn-menu-primary-600">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+    
+            <br><br>
+            <button mat-raised-button class="btn-primary-600" [disabled]="!!loginForm?.invalid" [loading]="isSubmitting"
+              (click)="loginAdministracion()">Ingresar</button>
+          </form>
+        </mat-card-content>
+      </div>
+    </div>
+  </div>
+  <div class="rigth-inf ">
+    <div class="text-font-item-1">
+      Modernización y transformación
+    </div>
+    <div class="text-font-item-2">
+      La modernización y transformación de la gestión, eco amigable con reducción de costos y uso de
+      la papelería impresa, al servicio de usuarios internos y usuarios externos en una plataforma
+      única de ingreso de trámites, implementando el uso de la firma digital.
+    </div>
+    <footer class="bottom-right">
+      <div>
+        &copy; 2023, V.1.3.5
+      </div>
+    </footer>
+  </div>
+</div-->
+
+
+
+
+
+
+
+
+
+
+<body>
+  <section class="container">
+              <img src="images/doctora.webp" class="imagen" />
+              <h1 class="titulo" >SALUD</h1>
+              <form class="login" [formGroup]="loginForm">
+
+                  <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label><mat-icon>person</mat-icon> Ingresar usuario</mat-label>
+                    <input matInput placeholder="Usuario" name="username" formControlName="username"  autocomplete="off">
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="outline"  style="width: 100%;">
+                    <mat-label><mat-icon>person</mat-icon> Ingrese contraseña</mat-label>
+                    <input matInput placeholder="Contraseña" name="password" type="password" formControlName="password"
+                      [type]="hide ? 'password' : 'text'" (keydown.enter)="$event.preventDefault(); loginAdministracion()"  autocomplete="off">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
+                      <mat-icon class = "btn-menu-primary-600">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+
+                  <button id="ingresar" class="ingresar" (click)="loginAdministracion()">INGRESAR</button>
+              </form>
+          
+  </section>
+</body>
+
+
+<!--form class="login">
+  <input type="text" placeholder="Username">
+  <input type="password" placeholder="Password">
+  <button>Login</button>
+</form>
+
+<a href="https://codepen.io/davinci/" target="_blank">check my other pens</a-->

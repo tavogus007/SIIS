@@ -1,0 +1,45 @@
+.btn-style {
+	position: relative !important;
+	font: inherit !important;
+	background-color: #09b8b0 !important;// #f0f0f0 !important;
+	border: 0 !important;
+	color: #ffffff !important;//#242424 !important;
+	border-radius: 0.5em !important;
+	font-size: 1.4rem !important;
+	margin: 5px !important;
+	padding: 0.375em 1em !important;
+	font-weight: 600 !important;
+	text-shadow: 0 0.0625em 0 #161515 !important;//0 0.0625em 0 #fff !important;
+	box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
+		0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
+		0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #676767, 0 0.425em 0.5em 0 #403f3f !important;
+	transition: 0.25s ease !important;
+	pointer: cursor !important;
+	touch-action: manipulation !important;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+	cursor: pointer !important;
+
+	&:active,
+	&:hover {
+		transform: translateY(0.225em) !important;
+		box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef,
+			0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
+			0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece !important;
+
+		&:after {
+			height: calc(100% + 0.225em) !important;
+		}
+	}
+
+	&:after {
+		position: absolute !important;
+		content: "" !important;
+		display: block !important;
+		width: 100% !important;
+		height: calc(100% + 0.375em) !important;
+		top: 0 !important;
+		left: 0 !important;
+		background-color: transparent !important;
+		transition: height 0.25s ease !important;
+	}
+}

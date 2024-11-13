@@ -1,0 +1,27 @@
+<div class='container'>
+    <ul>
+        @for (fichas of datosFichas; track fichas) {
+        <li>
+            @if(fichas.estado == 'P'){
+            <a class='normal' style="background: #f5cf4f; color: black;">
+                {{ fichas.ficha }}
+            </a>
+            }
+            @if(fichas.estado == 'O'){
+            <a (click)="openDialog()" class='normal' style="background: #c81d23; color: white;">
+                {{ fichas.ficha }}
+            </a>
+            }
+            @if(fichas.estado == 'L'){
+            <a class='normal' style="background: #008000; color: white;">
+                {{ fichas.ficha }}
+            </a>
+            }
+            <div class='info'>
+                <h3>{{ fichas.ficha }}</h3>
+                <p>{{ fichas.hora }}</p>
+            </div>
+        </li>
+        }
+    </ul>
+</div>

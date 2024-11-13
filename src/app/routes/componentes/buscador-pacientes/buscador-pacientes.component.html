@@ -1,0 +1,138 @@
+<div>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Buscador de pacientes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="form-field-full">
+                <div class="row">
+                    <div class="col-md-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>C.I.:</mat-label>
+                            <input matInput name="vci" [(ngModel)]="vci"
+                                   (keydown.enter)="buscarSice(vci)" type="number"
+                                   autocomplete="off">
+                            <button *ngIf="vci" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon (click)="vci=''">close</mat-icon>
+                            </button>
+                            <button *ngIf="!vci" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-hint>Ingrese el numero C.I. del paciente</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Primer Apellido:</mat-label>
+                            <input matInput name="vappaterno" [(ngModel)]="vappaterno"
+                                   (keydown.enter)="buscarSice(vappaterno)">
+                            <button *ngIf="vappaterno" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon (click)="vappaterno=''">close</mat-icon>
+                            </button>
+                            <button *ngIf="!vappaterno" matSuffix mat-icon-button
+                                    aria-label="Clear">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-hint>Ingrese el apellido paterno del paciente</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Segundo Apellido:</mat-label>
+                            <input matInput name="vapmaterno" [(ngModel)]="vapmaterno"
+                                   (keydown.enter)="buscarSice(vapmaterno)">
+                            <button *ngIf="vapmaterno" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon (click)="vapmaterno=''">close</mat-icon>
+                            </button>
+                            <button *ngIf="!vapmaterno" matSuffix mat-icon-button
+                                    aria-label="Clear">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-hint>Ingrese el apellido materno del paciente</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombres:</mat-label>
+                            <input matInput name="vnombre" [(ngModel)]="vnombre"
+                                   (keydown.enter)="buscarSice(vnombre)">
+                            <button *ngIf="vnombre" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon (click)="vnombre=''">close</mat-icon>
+                            </button>
+                            <button *ngIf="!vnombre" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-hint>Ingrese el nombre del paciente</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Codigo SICE:</mat-label>
+                            <input matInput type="text" name="vcodigoseg" type="number"
+                                   [(ngModel)]="vcodigoseg"
+                                   (keydown.enter)="buscarCodigoSice(vcodigoseg)">
+                            <button *ngIf="vcodigoseg" matSuffix mat-icon-button aria-label="Clear">
+                                <mat-icon (click)="vcodigoseg=''">close</mat-icon>
+                            </button>
+                            <button *ngIf="!vcodigoseg" matSuffix mat-icon-button
+                                    aria-label="Clear">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-hint>Ingrese el codigo (sice) del paciente</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+            </form>
+            <!--div class="d-flex justify-content-end m-t-8">
+                <div class="example-button-container">
+                    <button mat-fab extended class="button-blanco">
+                        <mat-icon class="indicador">create_new_folder</mat-icon>
+                        Nuevo
+                    </button>
+                </div>
+                <div class="example-button-container">
+                    <button mat-fab extended class="button-blanco">
+                        <mat-icon class="indicador">delete_sweep</mat-icon>
+                        Limpiar
+                    </button>
+                </div>
+              </div-->
+            <!--br>
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+                <ng-container matColumnDef="dtspsl_ci">
+                    <mat-header-cell *matHeaderCellDef> Cedula de identidad </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_ci}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_nombres">
+                    <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_nombres}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_paterno">
+                    <mat-header-cell *matHeaderCellDef> Primer apellido </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_paterno}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dtspsl_materno">
+                    <mat-header-cell *matHeaderCellDef> Segundo apellido </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dtspsl_materno}}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button mat-fab class="button-blanco" (click)="funcionEnviaDatos(element)">
+                            <mat-icon class="indicador">assignment_turned_in</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table-->
+
+            <!--button mat-fab extended (click)="funcionCancelar()">
+                <mat-icon class="indicador">reply_all</mat-icon>
+                Cancelar
+            </button-->
+        </mat-card-content>
+    </mat-card>
+</div>

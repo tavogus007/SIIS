@@ -1,0 +1,216 @@
+<mat-stepper orientation="vertical" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Seleccione especialidad</ng-template>
+    <ng-template matStepContent>
+      <div class="row">
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - PEDIATRIA
+            <span>
+              <img class="svg" src="/images/especialidades/cirugia_general.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - GASTROENTEROLOGIA
+            <span>
+              <img class="svg" src="/images/especialidades/cardiologia.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - MEDICINA GENERAL PROGRAMA
+            <span>
+              <img class="svg" src="/images/especialidades/fisioterapia.png" />
+            </span>
+          </button>
+        </div>
+
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - PEDIATRIA
+            <span>
+              <img class="svg" src="/images/especialidades/medicina_general.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - GASTROENTEROLOGIA
+            <span>
+              <img class="svg" src="/images/especialidades/medicina_interna.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - MEDICINA GENERAL PROGRAMA
+            <span>
+              <img class="svg" src="/images/especialidades/ginecologia_obstetricia.png" />
+            </span>
+          </button>
+        </div>
+
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - PEDIATRIA
+            <span>
+              <img class="svg" src="/images/especialidades/nutricion.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - GASTROENTEROLOGIA
+            <span>
+              <img class="svg" src="/images/especialidades/odontologia.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - MEDICINA GENERAL PROGRAMA
+            <span>
+              <img class="svg" src="/images/especialidades/pediatria.png" />
+            </span>
+          </button>
+        </div>
+
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - PEDIATRIA
+            <span>
+              <img class="svg" src="/images/especialidades/traumatologia.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - GASTROENTEROLOGIA
+            <span>
+              <img class="svg" src="/images/especialidades/urologia.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - MEDICINA GENERAL PROGRAMA
+            <span>
+              <img class="svg" src="/images/especialidades/psicologia.png" />
+            </span>
+          </button>
+        </div>
+
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - PEDIATRIA
+            <span>
+              <img class="svg" src="/images/especialidades/gastro.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - GASTROENTEROLOGIA
+            <span>
+              <img class="svg" src="/images/especialidades/traumato.png" />
+            </span>
+          </button>
+        </div>
+        <div class="col-md-4 cardEsp">
+          <button class="btn-especialidad" matStepperNext>CE - MEDICINA GENERAL PROGRAMA
+            <span>
+              <img class="svg" src="/images/especialidades/medicina_familiar.png" />
+            </span>
+          </button>
+        </div>
+
+      </div>
+
+      <button mat-button matStepperNext>Siguiente</button>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Seleccionar día/médico</ng-template>
+    <ng-template matStepContent>
+
+      <app-calendario (nextSteper)="nextStep()"></app-calendario>
+
+      <button mat-button matStepperPrevious>Anterior</button>
+      <button mat-button matStepperNext (click)="funcionSeleccion()">Siguiente</button>
+
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Seleccionar hora</ng-template>
+    @if(datosFichas.length > 0){
+    <app-fichas class="text-align: center;"></app-fichas>
+    }
+    <button mat-button matStepperPrevious>Anterior</button>
+    <button mat-button matStepperNext>Siguiente</button>
+  </mat-step>
+  @if(datosFichas.length > 0){
+  <mat-step>
+    <ng-template matStepLabel>Ficha Reservada</ng-template>
+
+    <br> <br>
+    <mtx-alert type="success" [elevation]="15"
+               style="border-color: rgb(13 185 177) !important; background-color: rgb(150 223 222 / 20%) !important;">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <strong>
+            <h1> <span>&#10003;</span> FICHA RESERVADA</h1>
+          </strong>
+        </div>
+        <div class="col-md-3 text-center">
+          <img class="m-b-8 r-full" src="images/registro_1.png" alt="" width="150px"
+               style="margin-top: 20%;">
+        </div>
+        <div class="col-md-9">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListItemIcon>account_circle</mat-icon>
+              <div matListItemTitle>
+                <strong>
+                  ME - 002 de 08:30
+                </strong>
+              </div>
+              <div matListItemLine>FICHA</div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListItemIcon>account_circle</mat-icon>
+              <div matListItemTitle>
+                <strong>
+                  12-10-2024
+                </strong>
+              </div>
+              <div matListItemLine>FECHA DE ATENCIÓN</div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListItemIcon>cake</mat-icon>
+              <div matListItemTitle>
+                <strong>
+                  Luis ariel tarifa Oblitas.
+                </strong>
+              </div>
+              <div matListItemLine>DR(A).</div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListItemIcon>cake</mat-icon>
+              <div matListItemTitle>
+                <strong>
+                  MEDICINA GENERAL.
+                </strong>
+              </div>
+              <div matListItemLine>CONSULTORIO</div>
+            </mat-list-item>
+
+          </mat-list>
+
+        </div>
+        <div class="col-md-12 text-center">
+          <button mat-fab extended class="button-blanco" (click)="funcionImprimirFicha();">
+            <mat-icon>print</mat-icon>
+            Imprimir
+          </button>
+        </div>
+      </div>
+
+    </mtx-alert>
+
+
+    <button mat-button matStepperPrevious>Anterior</button>
+  </mat-step>
+  }
+</mat-stepper>

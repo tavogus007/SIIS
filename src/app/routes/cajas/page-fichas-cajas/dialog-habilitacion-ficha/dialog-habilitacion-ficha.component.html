@@ -1,0 +1,129 @@
+<!--h2 mat-dialog-title>Delete file</h2>
+<mat-dialog-content>
+    Nro. Historia Clínica SICE: 81443 <br>
+    Nro. Historia Clínica SIIS: 317858 <br>
+    Paciente: MAYA ISABELA SILVA PINTO <br>
+    C.I: 15208422 <br>
+    Código de Ficha: C1-PE / 004 <br>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</mat-dialog-actions-->
+<mtx-alert type="success" [elevation]="15"
+           style="border-color: rgb(13 185 177) !important; background-color: rgb(150 223 222 / 20%) !important; margin-bottom: 0px;">
+    <div class="row">
+        <div class="row col-md-12 text-center">
+            <div class="col-md-5">
+                <strong>
+                    <h3> <span>&#10003;</span> HABILITACIÓN DE FICHA </h3>
+                </strong>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="flex-col">
+                        <button mat-mini-fab class="button-blanco-circular">
+                            <mat-icon class="indicador btn">loop</mat-icon>
+                        </button>
+                        <br>
+                        <strong class="txtLlamado">Rellamado</strong>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="flex-col">
+                        <button mat-mini-fab class="button-blanco-circular" mat-dialog-close>
+                            <mat-icon class="indicador btn">reply_all</mat-icon>
+                        </button>
+                        <br>
+                        <strong class="txtLlamado">Pendiente</strong>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="flex-col">
+                        <button mat-mini-fab class="button-blanco-circular" mat-dialog-close>
+                            <mat-icon class="indicador btn">delete_sweep</mat-icon>
+                        </button>
+                        <br>
+                        <strong class="txtLlamado">No vino</strong>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="flex-col">
+                        <button mat-mini-fab class="button-blanco-circular" mat-dialog-close>
+                            <mat-icon class="indicador btn">thumb_up_alt</mat-icon>
+                        </button>
+                        <br>
+                        <strong class="txtLlamado">Habilitar</strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <mat-list>
+                <mat-list-item>
+                    <mat-icon matListItemIcon>receipt</mat-icon>
+                    <div matListItemTitle>
+                        <strong>
+                            C1-PE / 004
+                        </strong>
+                    </div>
+                    <div matListItemLine>Código de Ficha</div>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-icon matListItemIcon>memory</mat-icon>
+                    <div matListItemTitle>
+                        <strong>
+                            81443
+                        </strong>
+                    </div>
+                    <div matListItemLine>Nro. Historia Clínica SICE</div>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-icon matListItemIcon>memory</mat-icon>
+                    <div matListItemTitle>
+                        <strong>
+                            317858
+                        </strong>
+                    </div>
+                    <div matListItemLine>Nro. Historia Clínica SIIS</div>
+                </mat-list-item>
+
+            </mat-list>
+        </div>
+        <div class="col-md-6">
+            <mat-list>
+
+                <mat-list-item>
+                    <mat-icon matListItemIcon>account_circle</mat-icon>
+                    <div matListItemTitle>
+                        <strong>
+                            MAYA ISABELA SILVA PINTO
+                        </strong>
+                    </div>
+                    <div matListItemLine>Paciente</div>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-icon matListItemIcon>radio_button_checked</mat-icon>
+                    <div matListItemTitle>
+                        <strong>
+                            15208422
+                        </strong>
+                    </div>
+                    <div matListItemLine>C.I</div>
+                </mat-list-item>
+
+                
+
+            </mat-list>
+        </div>
+    </div>
+
+</mtx-alert>
+<!--div class="col-md-12 text-center">
+    <button mat-fab extended class="button-blanco" >
+        <mat-icon>print</mat-icon>
+        Imprimir
+    </button>
+</div-->

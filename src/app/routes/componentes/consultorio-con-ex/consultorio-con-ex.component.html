@@ -1,0 +1,22 @@
+<mat-card class="global-card">
+    <mat-card-content>
+        <mat-stepper orientation="vertical">
+            <mat-step>
+                <ng-template matStepLabel>Signos Vitales</ng-template>
+                <ng-template matStepContent>
+                    <app-signos-vitales [tipoConsumo]="'LECTURA'" [edicion]="true" ></app-signos-vitales>
+                    
+                </ng-template>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Consultorio Médico</ng-template>
+                <ng-template matStepContent>
+                    <p>This content was also rendered lazily</p>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </ng-template>
+            </mat-step>
+            
+        </mat-stepper>
+    </mat-card-content>
+</mat-card>

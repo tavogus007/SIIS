@@ -1,0 +1,91 @@
+<div class="row">
+    <button mat-fab class="classbutton">
+        <mat-icon class="indicador" matSuffix>assignment</mat-icon>
+    </button>
+    <div>
+        <strong>&nbsp;&nbsp;Kardex</strong>
+        <p>&nbsp;&nbsp;Listado de historiales clinicos</p>
+    </div>
+</div>
+@if(opcion == 'listarFormularios'){
+<mat-card class="global-card">
+    <mat-card-header>
+        <mat-card-title>
+            <strong>
+                Expedientes clinicos digitales
+            </strong>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+        <div class="mat-elevation-z8 table-container">
+            <mat-table mat-table [dataSource]="dataSource" class="container" matSort>
+                <ng-container matColumnDef="serial">
+                    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.serial}}
+
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="desc_from">
+                    <mat-header-cell *matHeaderCellDef> DESCRIPCION FORMULARIO </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.desc_from}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="opciones">
+                    <mat-header-cell *matHeaderCellDef> OPCIONES </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-mini-fab class="button-blanco-circular" [mtxTooltip]="editar"
+                                mtxTooltipPosition="after" (click)="funcionEditar(element)">
+                            <mat-icon class="indicador">edit</mat-icon>
+                        </button>
+                        <ng-template #editar>
+                            <div> <span>&#10003;</span> Editar formulario </div>
+                        </ng-template>
+                        <button mat-mini-fab class="button-blanco-circular" [mtxTooltip]="eliminar"
+                                mtxTooltipPosition="after">
+                            <mat-icon class="indicador">delete_forever</mat-icon>
+                        </button>
+                        <ng-template #eliminar>
+                            <div> <span>&#10003;</span> Eliminar formulario </div>
+                        </ng-template>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-card-content>
+
+</mat-card>
+}
+
+@if(opcion == 'editarformulario'){
+<mat-card class="global-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>
+        <strong>
+            FORMULARIO DE MEDICINA GENERAL
+        </strong>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Creacion de variables
+      </mat-card-subtitle>
+    </mat-card-header>
+  
+    <mat-card-content>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Configuracion de opciones</h3>
+                <app-option-form></app-option-form>
+            </div>
+            <div class="col-md-8">
+                <h3>Variables</h3>
+                <app-render-form></app-render-form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+}

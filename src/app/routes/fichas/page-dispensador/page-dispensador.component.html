@@ -1,0 +1,27 @@
+<p>page-dispensador works!</p>
+
+<section>
+    <div class="example-label">Extended Fab</div>
+    <div class="example-button-row">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-fab extended (click)="funcionLlamar()">
+            <mat-icon>favorite</mat-icon>
+            Basic
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-fab extended disabled>
+            <mat-icon>favorite</mat-icon>
+            Disabled
+          </button>
+        </div>
+        <div class="example-button-container">
+          <a mat-fab extended routerLink="." (click)="ngOnDestroy()">
+            <mat-icon>favorite</mat-icon>
+            Link
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,27 @@
+<div class="text-center">
+    <strong>
+    <h1>
+            {{data.titulo}}
+        </h1>
+    </strong>
+    @if(data.tipo == "confirm"){
+        <img class="m-b-8 r-full" src="images/confirmacion.webp" alt="" width="150px">
+    }
+    @if(data.tipo == "saccses"){
+        <img class="m-b-8 r-full" src="images/confirmacion.webp" alt="" width="150px">
+    }
+    @if(data.tipo == "error"){
+        <img class="m-b-8 r-full" src="images/noo.png" alt="" width="150px">
+    }
+</div>
+<mat-dialog-content>
+    <strong>
+    <h2>
+            {{data.mensaje}}
+        </h2>
+    </strong>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>SI</button>
+    <button mat-button mat-dialog-close>NO</button>
+</mat-dialog-actions>

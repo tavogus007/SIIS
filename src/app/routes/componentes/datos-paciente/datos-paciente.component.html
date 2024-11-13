@@ -1,0 +1,186 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>
+      <strong>
+        Historial Clinico (SIIS)
+        4875
+      </strong>
+      <button mat-icon-button [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-subtitle>
+      Información del paciente
+    </mat-card-subtitle>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+  </mat-card-header>
+
+  <mat-card-content>
+    
+    @if(!estadoCard){
+    <div class="row">
+      <div [class]="class">
+        <div class="text-center">
+          <ngx-skeleton-loader count="1" appearance="circle" [theme]="{ 
+            width:'200px',
+            height: '200px'
+          }" />
+          <ngx-skeleton-loader count="1"
+                               [theme]="{'border-radius': '5px',height: '50px',width:'100%',border: '1px solid white'}" />
+          <ngx-skeleton-loader animation="progress" />
+        </div>
+      </div>
+      <div [class]="class">
+        <mat-list>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+          <br><br>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+          <br><br>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div [class]="class">
+        <mat-list>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+          <br><br>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+          <br><br>
+          <mat-list-item>
+            <div matListItemTitle>
+              <ngx-skeleton-loader animation="progress" />
+            </div>
+            <ngx-skeleton-loader animation="progress" />
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+    }
+    @if(estadoCard){
+    <div class="row">
+      <div [class]="class">
+        <div class="text-center">
+          <img class="m-b-8 r-full" src="images/MASCULINO.gif" alt="" width="200px">
+          <h2 class="m-t-0 m-b-8 f-w-400">
+            <strong>
+              Luis ariel tarifa Oblitas
+            </strong>
+          </h2>
+          <p class="m-t-0 m-b-8">Nombre Completo</p>
+        </div>
+      </div>
+      <div [class]="class">
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>account_circle</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                200
+              </strong>
+            </div>
+            <div matListItemLine>Historial Clinico (SICE)</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon>account_circle</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                8745789
+              </strong>
+            </div>
+            <div matListItemLine>Carnet de identidad</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon>cake</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                30 de enero de 1971
+              </strong>
+            </div>
+            <div matListItemLine>Fecha de Nacimiento</div>
+          </mat-list-item>
+
+
+        </mat-list>
+      </div>
+      <div [class]="class">
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>group</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                SOLTERO (A)
+              </strong>
+            </div>
+            <div matListItemLine>Estado civil</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon>home</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                Zona san pedro
+              </strong>
+            </div>
+            <div matListItemLine>Domicilio</div>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListItemIcon>phone_iphone</mat-icon>
+            <div matListItemTitle>
+              <strong>
+                7147893
+              </strong>
+            </div>
+            <div matListItemLine>Teléfono/Celular</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>
