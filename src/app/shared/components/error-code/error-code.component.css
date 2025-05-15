@@ -1,0 +1,23 @@
+.matero-error-wrap {
+  text-align: center;
+}
+
+.matero-error-code {
+  padding: 1.25rem 0;
+  font-size: 10rem;
+  text-shadow: 0.1325825215rem 0.1325825215rem 0 rgba(0, 0, 0, 0.028575), 0.2651650429rem 0.2651650429rem 0 rgba(0, 0, 0, 0.02715), 0.3977475644rem 0.3977475644rem 0 rgba(0, 0, 0, 0.025725), 0.5303300859rem 0.5303300859rem 0 rgba(0, 0, 0, 0.0243), 0.6629126074rem 0.6629126074rem 0 rgba(0, 0, 0, 0.022875), 0.7954951288rem 0.7954951288rem 0 rgba(0, 0, 0, 0.02145), 0.9280776503rem 0.9280776503rem 0 rgba(0, 0, 0, 0.020025), 1.0606601718rem 1.0606601718rem 0 rgba(0, 0, 0, 0.0186), 1.1932426933rem 1.1932426933rem 0 rgba(0, 0, 0, 0.017175), 1.3258252147rem 1.3258252147rem 0 rgba(0, 0, 0, 0.01575), 1.4584077362rem 1.4584077362rem 0 rgba(0, 0, 0, 0.014325), 1.5909902577rem 1.5909902577rem 0 rgba(0, 0, 0, 0.0129), 1.7235727791rem 1.7235727791rem 0 rgba(0, 0, 0, 0.011475), 1.8561553006rem 1.8561553006rem 0 rgba(0, 0, 0, 0.01005), 1.9887378221rem 1.9887378221rem 0 rgba(0, 0, 0, 0.008625), 2.1213203436rem 2.1213203436rem 0 rgba(0, 0, 0, 0.0072), 2.253902865rem 2.253902865rem 0 rgba(0, 0, 0, 0.005775), 2.3864853865rem 2.3864853865rem 0 rgba(0, 0, 0, 0.00435), 2.519067908rem 2.519067908rem 0 rgba(0, 0, 0, 0.002925), 2.6516504294rem 2.6516504294rem 0 rgba(0, 0, 0, 0.0015);
+}
+
+.matero-error-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2rem;
+}
+
+.matero-error-message {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+}/*# sourceMappingURL=error-code.component.css.map */

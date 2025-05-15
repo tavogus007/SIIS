@@ -8,16 +8,22 @@ import { Error404Component } from './routes/sessions/404.component';
 import { Error500Component } from './routes/sessions/500.component';
 import { LoginComponent } from './routes/sessions/login/login.component';
 import { RegisterComponent } from './routes/sessions/register/register.component';
+import { MascotasComponent } from './routes/mascotas/mascotas.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
+    //DESCOMENTAR PARA VOLVER AL ORIGINAL
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
+      
+      //DECOMENTAR
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'mascotas', component: MascotasComponent },
       { path: '403', component: Error403Component },
       { path: '404', component: Error404Component },
       { path: '500', component: Error500Component },
@@ -54,7 +60,15 @@ export const routes: Routes = [
         loadChildren: () => import('./routes/utilities/utilities.routes').then(m => m.routes),
       },
 
+      //{
+      //  path: 'mascotas',
+       // loadChildren: () => import('./routes/mascotas/mascotas.routes').then(m => m.routes),
+      //},
 
+      {
+        path: 'medico_en_tu_casa',
+        loadChildren: () => import('./routes/medico_en_tu_casa/medic_en_tu_casa.routes').then(m => m.routes),
+      },
 
       {
         path: 'fichas',
@@ -86,5 +100,7 @@ export const routes: Routes = [
       { path: 'register', component: RegisterComponent },
     ],
   },
+  //DESCOMENTAR
   { path: '**', redirectTo: 'dashboard' },
+  
 ];

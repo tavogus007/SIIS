@@ -1,0 +1,71 @@
+.cardEsp {
+  margin-top: 10px;
+}
+
+.btn-especialidad {
+  position: relative;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+  width: 100%;
+  height: 100px;
+  background: rgb(205, 229, 228);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding-left: 65px;
+  border: 0.5px solid rgba(3, 153, 145, 0.35);
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.btn-especialidad::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+  transform: translateX(-370px) skew(30deg);
+  transition: 0.55s ease-in-out;
+}
+
+.btn-especialidad:hover::after {
+  transform: translateX(370px) skew(30deg);
+}
+
+.btn-especialidad:hover {
+  padding-left: 0;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.btn-especialidad span {
+  position: absolute;
+  /*width: 150px;
+  height: 150px;*/
+  background-color: #fff;
+  border-radius: 50%;
+  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease-in-out;
+}
+
+.btn-especialidad:hover span {
+  left: calc(100% - 55px);
+  background-color: #fff;
+}
+
+.svg {
+  /*height: 150px;*/
+  width: 50px;
+  fill: #fff;
+}
+
+.btn-especialidad:hover .svg {
+  fill: #09b8b0;
+}/*# sourceMappingURL=reservar-ficha.component.css.map */

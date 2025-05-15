@@ -1,0 +1,12 @@
+.example-table-container {
+  position: relative;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.espaciado {
+  padding-bottom: 150%;
+}/*# sourceMappingURL=page-historial.component.css.map */

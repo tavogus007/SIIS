@@ -112,7 +112,7 @@ export class LoginComponent {
 
   loginAdministracion() {
     this.isSubmitting = true;
-    let data = {
+    const data = {
       "usuario": this.username?.value,
       "clave": this.password?.value,
       "sistema": "SIIS"
@@ -190,6 +190,36 @@ export class LoginComponent {
                 },
               ]
             },
+            {
+              "route":"mascotas",
+              "name":"Mascotas",
+              "type": "link",
+              "icon": "pets"
+            },
+            {
+              "route": "medico_en_tu_casa",
+              "name": "Medico en tu casa",
+              "type": "sub",
+              "icon": "home health",
+              "children": [
+                {
+                  "route":"agenda",
+                  "name":"Agenda",
+                  "type":"link"
+                },
+                {
+                  "route":"ruta",
+                  "name":"Ruta",
+                  "type":"link"
+                },
+                {
+                  "route":"historial",
+                  "name":"Historial",
+                  "type":"link"
+                }
+              ]
+            },
+
             {
               "route": "cajas",
               "name": "Cajas",

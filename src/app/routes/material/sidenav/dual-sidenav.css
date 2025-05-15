@@ -1,0 +1,16 @@
+.demo-sidenav-spacer {
+  flex: 1;
+}
+
+.demo-sidenav-playlist {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.demo-sidenav-playlist .mat-mdc-button {
+  width: 100%;
+}
+
+.demo-sidenav-playlist-header {
+  text-align: center;
+}/*# sourceMappingURL=dual-sidenav.css.map */

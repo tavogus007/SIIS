@@ -1,0 +1,8 @@
+.example-table-container {
+  position: relative;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}/*# sourceMappingURL=page-kardex.component.css.map */

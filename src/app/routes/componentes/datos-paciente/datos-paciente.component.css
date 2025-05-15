@@ -1,0 +1,104 @@
+.example-header-image {
+  background-image: url("../../../../../public/images/incognito.gif");
+  background-size: cover;
+}
+
+.example-card {
+  border: 1px solid #09B8B0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.example-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.example-header-image {
+  background-color: #09B8B0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #09B8B0;
+}
+
+.mat-card-subtitle {
+  font-size: 1rem;
+  color: #777;
+}
+
+.m-b-8 {
+  margin-bottom: 8px;
+}
+
+.m-t-0 {
+  margin-top: 0;
+}
+
+.f-w-400 {
+  font-weight: 400;
+}
+
+.r-full {
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.r-full:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mat-list-item {
+  transition: background-color 0.3s ease;
+}
+
+.mat-list-item:hover {
+  background-color: #09B8B0;
+}
+
+.mat-icon {
+  color: #09B8B0;
+}
+
+.mat-list-item div[matListItemTitle] {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.mat-list-item div[matListItemLine] {
+  font-size: 1rem;
+  color: #777;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+img, mat-list-item {
+  animation: fadeIn 0.5s ease-in-out;
+}/*# sourceMappingURL=datos-paciente.component.css.map */

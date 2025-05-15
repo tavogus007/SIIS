@@ -1,7 +1,7 @@
 {
   "name": "ng-matero",
   "version": "0.0.0-NOT-USED",
-  "author":"Vladimir",
+  "author": "Vladimir",
   "engines": {
     "yarn": ">=1.22.0 <2",
     "npm": "Please use Yarn instead of NPM to install dependencies"
@@ -58,13 +58,14 @@
     "ngx-spinner": "^17.0.0",
     "ngx-toastr": "^19.0.0",
     "photoviewer": "^3.10.1",
+    "quagga": "^0.12.1",
     "rxjs": "~7.8.0",
     "screenfull": "^6.0.2",
     "tslib": "^2.6.0",
     "zone.js": "~0.14.7"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.1.4",
+    "@angular-devkit/build-angular": "^18.2.12",
     "@angular-eslint/builder": "^18.3.0",
     "@angular-eslint/eslint-plugin": "^18.3.0",
     "@angular-eslint/eslint-plugin-template": "^18.3.0",

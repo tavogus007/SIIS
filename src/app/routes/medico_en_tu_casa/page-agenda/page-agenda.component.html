@@ -1,0 +1,106 @@
+<!-- page-agenda.component.html -->
+<div class="row">
+  <button mat-fab class="classbutton">
+      <mat-icon class="indicador" matSuffix>assignment</mat-icon>
+  </button>
+  <div>
+      <strong>&nbsp;&nbsp;Medico en tu casa </strong>
+      <p>&nbsp;&nbsp;Apartado para ver la agenda del doctor</p>
+  </div>
+</div>
+
+<mat-card class="global-card">
+<mat-card-header>
+  <mat-card-title>
+    <strong>
+      Agenda de Citas
+    </strong>
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  
+  <!-- Tabla de datos -->
+  <div class="mat-elevation-z8 table-container">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Columna Serial -->
+      <ng-container matColumnDef="serial">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+        <td mat-cell *matCellDef="let row; index as i"> {{i + 1}} </td>
+      </ng-container>
+
+      <!-- Columna Histórico -->
+      <ng-container matColumnDef="historico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> HISTÓRICO </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-fab class="button-blanco-circular" [matTooltip]="'Ver historial de atenciones'">
+            <mat-icon class="indicador">touch_app</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Columna SIIS -->
+      <ng-container matColumnDef="siis">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> HISTORIA CLÍNICA SIIS </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_historia_clinica}} </td>
+      </ng-container>
+
+      <!-- Columna Diagnóstico -->
+      <ng-container matColumnDef="diagnostico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DIAGNÓSTICO </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button mat-fab class="button-blanco-circular" [matTooltip]="'Llenar formulario de diagnóstico'">
+            <mat-icon class="indicador">list_alt</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Columna Paciente -->
+      <ng-container matColumnDef="paciente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> PACIENTE </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_paciente}} </td>
+      </ng-container>
+
+      <!-- Columna Razon de Consulta -->
+      <ng-container matColumnDef="razon_consulta">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> RAZÓN DE CONSULTA </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_razon_consulta}} </td>
+      </ng-container>
+
+      <!-- Columna Celular de Referencia -->
+      <ng-container matColumnDef="cel_referencia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CELULAR DE REFERENCIA </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_celular_referencia}} </td>
+      </ng-container>
+
+      <!-- Columna Información de Domicilio -->
+      <ng-container matColumnDef="info_domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> INFORMACIÓN DE DOMICILIO </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_info_domicilio}} </td>
+      </ng-container>
+
+      <!-- Columna Código de Ficha -->
+      <ng-container matColumnDef="cod_ficha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CÓDIGO DE FICHA </th>
+        <td mat-cell *matCellDef="let row"> {{row.age_cod_ficha}} </td>
+      </ng-container>
+      
+      <!-- Columna MONITOREO AVANZADO -->
+      <ng-container matColumnDef="M.A.">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> MONITOREO AVANZADO </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button 
+            [ngStyle]="{'background-color': row.age_m_a ? 'green' : 'red', 'color': 'white'}"
+            (click)="toggleMonitoreo(row)">
+            {{ row.age_m_a ? 'Sí' : 'No' }}
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Filas de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
+  </div>
+</mat-card-content>
+</mat-card>

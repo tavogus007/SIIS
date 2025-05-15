@@ -9,8 +9,8 @@ export const environment = {
   //URL_API_LOGIN: 'http://192.168.0.104:3000/autenticacion/login',
   //URL_API_LOGIN: 'http://192.168.8.4:84/api/v1/servicio/login',
   //URL_API_SOCKET: 'http://192.168.0.104:5000/',
-  URL_API_LOGIN: 'http://192.168.8.4:84/api/v1/servicio/login',
-  //URL_API_LOGIN: 'http://localhost:3000/autenticacion/login',
+  //URL_API_LOGIN: 'http://192.168.8.4:84/api/v1/servicio/login',
+  URL_API_LOGIN: 'http://localhost:3000/autenticacion/login',
   URL_API_SOCKET: 'http://localhost:5000/',
 };
 

@@ -1,0 +1,41 @@
+.example-table-container {
+    position: relative;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.custom-container {
+    display: flex;
+    gap: 10px; /* Espacio entre los divs */
+}
+
+.custom-div {
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #16738f; /* Borde sólido de 2px de grosor y color negro */
+    flex: 1; /* Hace que los divs ocupen el espacio disponible */
+}
+
+.first-div {
+    background-color: transparent; /* Color de fondo para el primer div */
+    width: 200px; /* Ancho personalizado */
+    height: 400px; /* Alto personalizado */
+}
+
+.second-div {
+    background-color: transparent; /* Fondo transparente */
+    border-color: #16738f; /* Color del borde rojo */
+    width: 300px; /* Ancho personalizado */
+    height: 400px; /* Alto personalizado */
+}
+
+.third-div {
+    background-color: transparent; /* Fondo transparente */
+    border-color: #16738f; /* Color del borde rojo */
+    width: 100%; /* Ancho personalizado */
+    height: 400px; /* Alto personalizado */
+}
+

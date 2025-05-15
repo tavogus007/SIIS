@@ -1,0 +1,13 @@
+.matero-sidebar-notice {
+  display: block;
+  height: 100%;
+}
+.matero-sidebar-notice .mat-mdc-tab-group {
+  height: 100%;
+}
+.matero-sidebar-notice .mat-mdc-tab-body-wrapper {
+  flex: 1;
+}
+.matero-sidebar-notice .mat-mdc-tab-body-content {
+  padding: 1rem;
+}/*# sourceMappingURL=sidebar-notice.component.css.map */

@@ -34,7 +34,9 @@ export class PageKardexComponent implements AfterViewInit {
   displayedColumns: string[] = ['serial', 'historico', 'siis', 'sice', 'tip_reserva', 'fecha_atencion', 'paciente', 'servicio', 'codigo_ficha', 'tip_paciente', 'salida', 'recepcion'];
   dataSource: MatTableDataSource<any>;
   buscador = '';
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   @ViewChild(MatSort) sort: MatSort | any;
   datosLista: any;
   constructor() {

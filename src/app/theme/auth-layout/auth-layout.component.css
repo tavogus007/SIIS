@@ -1,0 +1,7 @@
+.matero-auth-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  background-image: radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.3) 0, transparent 50%), radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.3) 0, transparent 50%), radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.3) 0, transparent 50%), radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.3) 0, transparent 50%), radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.3) 0, transparent 50%), radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.3) 0, transparent 50%);
+}/*# sourceMappingURL=auth-layout.component.css.map */
