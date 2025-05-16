@@ -1,12 +1,65 @@
-.example-table-container {
-  position: relative;
-  overflow: auto;
+/* page-agenda.component.css */
+/* Estructura principal de la tabla */
+.mat-table {
+  width: 100%;
+  border-collapse: separate;
 }
 
-table {
+/* Centrado COMPLETO para todas las celdas (cabecera y contenido) */
+.mat-header-cell,
+.mat-cell {
+  display: flex;
+  align-items: center;     /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  text-align: center;
+  vertical-align: middle;
+  height: 100%;
+  padding: 0 12px;
+}
+
+/* Fuerza el centrado en el contenido de las celdas */
+.mat-cell > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
-.espaciado {
-  padding-bottom: 150%;
-}/*# sourceMappingURL=page-agenda.component.css.map */
+/* Excepción para la columna PACIENTE (alineación izquierda) */
+.mat-column-paciente {
+  justify-content: flex-start !important;
+  text-align: left !important;
+  padding-left: 16px !important;
+}
+
+/* Estilos específicos para botones */
+.button-blanco-circular {
+  margin: 0;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ajuste para iconos dentro de botones */
+.mat-icon {
+  margin: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Asegura que las filas tengan altura suficiente */
+.mat-row {
+  min-height: 48px; /* Altura mínima para mejor visualización */
+}
+
+/* Corrección para el paginador */
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+/* Ajuste para tooltips */
+.mat-tooltip {
+  white-space: pre-line;
+}

@@ -1,0 +1,135 @@
+<h2 mat-dialog-title class="titulo">FORMULARIO</h2>
+
+<mat-dialog-content class="contenido">
+  <!-- INFORMACIÓN PERSONAL DEL PACIENTE -->
+  <section class="seccion">
+    <h3>INFORMACIÓN PERSONAL DEL PACIENTE</h3>
+    <div class="grid-col-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput value="Mamani Pacara Raul" disabled />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>SIIS</mat-label>
+        <input matInput value="CODIGOSIIS-123" disabled />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Historia</mat-label>
+        <input matInput value="CODIGO-123" disabled />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Edad</mat-label>
+        <input matInput value="54" disabled />
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Dirección</mat-label>
+      <input matInput value="Calle Simon Bolívar, entre..." disabled />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Razón de la consulta</mat-label>
+      <input matInput value="Dolor intenso en el estómago y fiebre" disabled />
+    </mat-form-field>
+  </section>
+
+  <!-- SIGNOS VITALES -->
+  <section class="seccion">
+    <h3>SIGNOS VITALES</h3>
+    <div class="grid-col-3">
+      <div class="vital">
+        <label>Frecuencia cardíaca [l/m]</label>
+        <div class="control">
+          <button mat-mini-button>-</button>
+          <span>65</span>
+          <button mat-mini-button>+</button>
+        </div>
+        <button mat-stroked-button color="primary">Reiniciar</button>
+      </div>
+      <div class="vital">
+        <label>Presión Arterial [mmHg]</label>
+        <div class="control-static">120/80</div>
+      </div>
+      <div class="vital">
+        <label>Frecuencia Respiratoria [r/m]</label>
+        <div class="control">
+          <button mat-mini-button>-</button>
+          <span>15</span>
+          <button mat-mini-button>+</button>
+        </div>
+        <button mat-stroked-button color="primary">Reiniciar</button>
+      </div>
+      <div class="vital">
+        <label>Temperatura [°C]</label>
+        <div class="control">
+          <button mat-mini-button>-</button>
+          <span>20</span>
+          <button mat-mini-button>+</button>
+        </div>
+        <button mat-stroked-button color="primary">Reiniciar</button>
+      </div>
+      <div class="vital">
+        <label>Saturación de Oxígeno [SpO2]</label>
+        <div class="control">
+          <button mat-mini-button>-</button>
+          <span>98</span>
+          <button mat-mini-button>+</button>
+        </div>
+        <button mat-stroked-button color="primary">Reiniciar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGNOSTICO PRESUNTIVO -->
+  <section class="seccion">
+    <h3>DIAGNOSTICO PRESUNTIVO</h3>
+    <mat-form-field appearance="fill" class="full-width">
+      <textarea matInput placeholder="Especifique aquí..."></textarea>
+    </mat-form-field>
+  </section>
+
+  <!-- RECETA -->
+  <section class="seccion">
+    <h3>RECETA</h3>
+    <div class="grid-col-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre del medicamento</mat-label>
+        <mat-select>
+          <mat-option>Seleccione una opción</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Presentación</mat-label>
+        <mat-select>
+          <mat-option>Seleccione una opción</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <mat-select>
+          <mat-option>Seleccione una opción</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Posología</mat-label>
+        <mat-select>
+          <mat-option>Seleccione una opción</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <!-- NOTAS ADICIONALES -->
+  <section class="seccion">
+    <h3>NOTAS ADICIONALES</h3>
+    <mat-form-field appearance="fill" class="full-width">
+      <textarea matInput placeholder="Escriba aquí..."></textarea>
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+
+<!-- BOTONES FINALES -->
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="accent">PDF</button>
+  <button mat-raised-button color="primary">Finalizar evaluación</button>
+  <button mat-raised-button color="warn" (click)="cerrar()">Cancelar</button>
+</mat-dialog-actions>

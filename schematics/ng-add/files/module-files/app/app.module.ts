@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';<% if(animations!='excluded') { %>
@@ -17,6 +18,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '@env/environment';
 import { BASE_URL, httpInterceptorProviders, appInitializerProviders } from '@core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -34,6 +36,7 @@ import { FakeLoginService } from './fake-login.service';
     CoreModule,
     ThemeModule,
     SharedModule,
+    MatDialogModule,
     RoutesModule,
     FormlyConfigModule.forRoot(),
     NgxPermissionsModule.forRoot(),
