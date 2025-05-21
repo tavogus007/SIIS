@@ -36,7 +36,6 @@ import { AgendaServiceService, FormAmd } from './../../../services/agenda-servic
     MatTooltipModule,
     CommonModule,
     MatDialogModule,
-    FormularioComponent,
   ],
   templateUrl: './page-agenda.component.html',
   styleUrl: './page-agenda.component.scss',
