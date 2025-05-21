@@ -39,11 +39,11 @@
       <div class="vital">
         <label>Frecuencia cardíaca [l/m]</label>
         <div class="control">
-          <button mat-mini-button>-</button>
-          <span>65</span>
-          <button mat-mini-button>+</button>
+          <button mat-mini-button (click)="modificarFC('restar')">-</button>
+          <span>{{ frecuenciaCardiaca.valor }}</span>
+          <button mat-mini-button (click)="modificarFC('sumar')">+</button>
         </div>
-        <button mat-stroked-button color="primary">Reiniciar</button>
+        <button mat-stroked-button color="primary" (click)="reiniciarFC()">Reiniciar</button>
       </div>
       <div class="vital">
         <label>Presión Arterial [mmHg]</label>
@@ -52,29 +52,29 @@
       <div class="vital">
         <label>Frecuencia Respiratoria [r/m]</label>
         <div class="control">
-          <button mat-mini-button>-</button>
-          <span>15</span>
-          <button mat-mini-button>+</button>
+          <button mat-mini-button (click)="modificarFR('restar')">-</button>
+          <span>{{ frecuenciaRespiratoria.valor }}</span>
+          <button mat-mini-button (click)="modificarFR('sumar')">+</button>
         </div>
-        <button mat-stroked-button color="primary">Reiniciar</button>
+        <button mat-stroked-button color="primary" (click)="reiniciarFR()">Reiniciar</button>
       </div>
       <div class="vital">
         <label>Temperatura [°C]</label>
         <div class="control">
-          <button mat-mini-button>-</button>
-          <span>20</span>
-          <button mat-mini-button>+</button>
+          <button mat-mini-button (click)="modificarTemp('restar')">-</button>
+          <span>{{ temperatura.valor }}</span>
+          <button mat-mini-button (click)="modificarTemp('sumar')">+</button>
         </div>
-        <button mat-stroked-button color="primary">Reiniciar</button>
+        <button mat-stroked-button color="primary" (click)="reiniciarTemp()">Reiniciar</button>
       </div>
       <div class="vital">
         <label>Saturación de Oxígeno [SpO2]</label>
         <div class="control">
-          <button mat-mini-button>-</button>
-          <span>98</span>
-          <button mat-mini-button>+</button>
+          <button mat-mini-button (click)="modificarSpO2('restar')">-</button>
+          <span>{{ saturacionOxigeno.valor }}</span>
+          <button mat-mini-button (click)="modificarSpO2('sumar')">+</button>
         </div>
-        <button mat-stroked-button color="primary">Reiniciar</button>
+        <button mat-stroked-button color="primary" (click)="reiniciarSpO2()">Reiniciar</button>
       </div>
     </div>
   </section>

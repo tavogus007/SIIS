@@ -1,3 +1,25 @@
+// Fuerza el tema claro en el diálogo
+:host {
+  background-color: white !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+
+  .mat-dialog-container {
+    background-color: white !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  .mat-form-field-label,
+  .mat-input-element,
+  .mat-select-value,
+  .mat-option-text {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.42) !important;
+  }
+}
+
 .titulo {
   text-align: center;
   font-weight: bold;
