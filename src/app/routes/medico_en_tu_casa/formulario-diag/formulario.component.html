@@ -7,15 +7,15 @@
     <div class="grid-col-4">
       <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input matInput value="Mamani Pacara Raul" disabled />
+        <input matInput value="JOEL REDEMIR QUISPE CHALCO" disabled />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>SIIS</mat-label>
-        <input matInput value="CODIGOSIIS-123" disabled />
+        <input matInput value="SIIS-123" disabled />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Historia</mat-label>
-        <input matInput value="CODIGO-123" disabled />
+        <input matInput value="HISTO-123" disabled />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Edad</mat-label>
@@ -47,7 +47,41 @@
       </div>
       <div class="vital">
         <label>Presión Arterial [mmHg]</label>
-        <div class="control-static">120/80</div>
+        <div class="control-presion">
+          <!-- Parte Sistólica -->
+          <div class="presion-input">
+            <span *ngIf="!editandoSistolica" (click)="editarSistolica()" class="valor-editable">
+              {{ presionArterial.sistolica }}
+            </span>
+            <input
+              *ngIf="editandoSistolica"
+              type="number"
+              [(ngModel)]="presionArterial.sistolica"
+              (blur)="guardarPresion('sistolica')"
+              (keyup.enter)="guardarPresion('sistolica')"
+              min="0"
+              autofocus
+            />
+          </div>
+
+          <span class="separador">/</span>
+
+          <!-- Parte Diastólica -->
+          <div class="presion-input">
+            <span *ngIf="!editandoDiastolica" (click)="editarDiastolica()" class="valor-editable">
+              {{ presionArterial.diastolica }}
+            </span>
+            <input
+              *ngIf="editandoDiastolica"
+              type="number"
+              [(ngModel)]="presionArterial.diastolica"
+              (blur)="guardarPresion('diastolica')"
+              (keyup.enter)="guardarPresion('diastolica')"
+              min="0"
+              autofocus
+            />
+          </div>
+        </div>
       </div>
       <div class="vital">
         <label>Frecuencia Respiratoria [r/m]</label>
@@ -81,48 +115,81 @@
 
   <!-- DIAGNOSTICO PRESUNTIVO -->
   <section class="seccion">
-    <h3>DIAGNOSTICO PRESUNTIVO</h3>
-    <mat-form-field appearance="fill" class="full-width">
-      <textarea matInput placeholder="Especifique aquí..."></textarea>
-    </mat-form-field>
-  </section>
+  <h3>DIAGNOSTICO PRESUNTIVO</h3>
+  <mat-form-field appearance="fill" class="full-width">
+    <textarea matInput 
+              [(ngModel)]="diagnosticoPresuntivo"
+              placeholder="Especifique aquí..."
+              required></textarea>
+  </mat-form-field>
+  <div *ngIf="intentoEnvio && !diagnosticoPresuntivo?.trim()" class="error-message">
+    Este campo es requerido
+  </div>
+</section>
 
   <!-- RECETA -->
   <section class="seccion">
-    <h3>RECETA</h3>
-    <div class="grid-col-4">
-      <mat-form-field appearance="fill">
-        <mat-label>Nombre del medicamento</mat-label>
-        <mat-select>
-          <mat-option>Seleccione una opción</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Presentación</mat-label>
-        <mat-select>
-          <mat-option>Seleccione una opción</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Cantidad</mat-label>
-        <mat-select>
-          <mat-option>Seleccione una opción</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Posología</mat-label>
-        <mat-select>
-          <mat-option>Seleccione una opción</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <h3>RECETA</h3>
+  <div class="grid-col-4">
+    <!-- Nombre Medicamento -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre del medicamento</mat-label>
+      <mat-select [(ngModel)]="medicamentoSeleccionado" required>
+        <mat-option *ngFor="let med of opcionesMedicamentos" [value]="med">
+          {{ med }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="intentoEnvio && !medicamentoSeleccionado" class="error-message">
+      Seleccione un medicamento
     </div>
-  </section>
+
+    <!-- Presentación -->
+    <mat-form-field appearance="fill">
+      <mat-label>Presentación</mat-label>
+      <mat-select [(ngModel)]="presentacionSeleccionada" required>
+        <mat-option *ngFor="let pres of opcionesPresentacion" [value]="pres">
+          {{ pres }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="intentoEnvio && !presentacionSeleccionada" class="error-message">
+      Seleccione una presentación
+    </div>
+
+    <!-- Cantidad -->
+    <mat-form-field appearance="fill">
+      <mat-label>Cantidad</mat-label>
+      <mat-select [(ngModel)]="cantidadSeleccionada" required>
+        <mat-option *ngFor="let cant of opcionesCantidad" [value]="cant">
+          {{ cant }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="intentoEnvio && !cantidadSeleccionada" class="error-message">
+      Seleccione una cantidad
+    </div>
+
+    <!-- Posología -->
+    <mat-form-field appearance="fill">
+      <mat-label>Posología</mat-label>
+      <mat-select [(ngModel)]="posologiaSeleccionada" required>
+        <mat-option *ngFor="let poso of opcionesPosologia" [value]="poso">
+          {{ poso }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="intentoEnvio && !posologiaSeleccionada" class="error-message">
+      Seleccione una posología
+    </div>
+  </div>
+</section>
 
   <!-- NOTAS ADICIONALES -->
   <section class="seccion">
     <h3>NOTAS ADICIONALES</h3>
     <mat-form-field appearance="fill" class="full-width">
-      <textarea matInput placeholder="Escriba aquí..."></textarea>
+      <textarea matInput [(ngModel)]="notasAdicionales" placeholder="Escriba aquí..."></textarea>
     </mat-form-field>
   </section>
 </mat-dialog-content>
@@ -130,6 +197,8 @@
 <!-- BOTONES FINALES -->
 <mat-dialog-actions align="end">
   <button mat-raised-button color="accent">PDF</button>
-  <button mat-raised-button color="primary">Finalizar evaluación</button>
+  <button mat-raised-button color="primary" (click)="finalizarEvaluacion()">
+    Finalizar evaluación
+  </button>
   <button mat-raised-button color="warn" (click)="cerrar()">Cancelar</button>
 </mat-dialog-actions>

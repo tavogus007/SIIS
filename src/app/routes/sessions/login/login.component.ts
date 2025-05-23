@@ -117,7 +117,11 @@ export class LoginComponent {
       "clave": this.password?.value,
       "sistema": "SIIS"
     };
-    this.auth.loginAdministracion(this.username?.value + "", this.password?.value + "", data)
+
+    this.auth.loginAdministracion(this.username?.value + "gustavog", this.password?.value + "095065", data)
+    //USUARIOS DE PRUEBA
+
+
       .subscribe(response => {
         //speechSynthesis.speak(new SpeechSynthesisUtterance("BIENVENIDOS AL SISTEMA DE SALUD"));
         const nombreUsuario = "Vladimir"; // Puedes cambiar esto según sea necesario
@@ -218,6 +222,12 @@ export class LoginComponent {
                   "type":"link"
                 }
               ]
+            },
+            {
+              "route":"map",
+              "name":"Medico en tu Casa V2",
+              "type": "link",
+              "icon": "home health"
             },
 
             {

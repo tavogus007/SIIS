@@ -9,6 +9,7 @@ import { Error500Component } from './routes/sessions/500.component';
 import { LoginComponent } from './routes/sessions/login/login.component';
 import { RegisterComponent } from './routes/sessions/register/register.component';
 import { MascotasComponent } from './routes/mascotas/mascotas.component';
+import { PageMapComponent } from './routes/medico_en_tu_casa_v2/page-map.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
       
       { path: 'dashboard', component: DashboardComponent },
       { path: 'mascotas', component: MascotasComponent },
+      { path: 'map', component: PageMapComponent },
       { path: '403', component: Error403Component },
       { path: '404', component: Error404Component },
       { path: '500', component: Error500Component },
@@ -69,6 +71,11 @@ export const routes: Routes = [
         path: 'medico_en_tu_casa',
         loadChildren: () => import('./routes/medico_en_tu_casa/medic_en_tu_casa.routes').then(m => m.routes),
       },
+
+      // {
+      //   path: 'medico_en_tu_casa_v2',
+      //   loadChildren: () => import('./routes/medico_en_tu_casa_v2/medico_en_tu_casa_v2.routes').then(m => m.routes),
+      // },
 
       {
         path: 'fichas',
