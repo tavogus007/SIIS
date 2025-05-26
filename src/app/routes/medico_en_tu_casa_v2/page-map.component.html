@@ -1,28 +1,60 @@
 <div class="row">
-    <button mat-fab class="classbutton">
-        <mat-icon class="indicador" matSuffix>pin drop</mat-icon>
-    </button>
-    <div>
-        <strong>&nbsp;&nbsp;Medico en tu casa V2 </strong>
-        <p>&nbsp;&nbsp;Mapa de rutas del doctor</p>
-    </div>
+  <button mat-fab class="classbutton">
+    <mat-icon class="indicador" matSuffix>pin drop</mat-icon>
+  </button>
+  <div>
+    <strong>&nbsp;&nbsp;Medico en tu casa V2 </strong>
+    <p>&nbsp;&nbsp;Mapa de rutas del doctor</p>
+  </div>
 </div>
 
 <mat-card class="global-card">
-    <mat-card-header>
-        <mat-card-title>
-            <strong>TITULO (MAPA)</strong>
-        </mat-card-title>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>
+      <strong>TITULO (MAPA)</strong>
+    </mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content>
-        <div class="custom-container">
-            <div class="custom-div first-div">
-                <strong>Sección</strong>
-                <p>Contenido de esta seccion</p>
+  <mat-card-content>
+    <div class="custom-container">
+      <div class="custom-div first-div">
+        <div class="map-wrapper" [class.collapsed]="!sidebarVisible">
+            <!-- Sidebar -->
+          <aside class="sidebar">
+            <div class="sidebar-header">
+              <span class="logo">MÉDICO EN TU CASA</span>
+              <label class="toggle">
+                <input type="checkbox" [checked]="sidebarVisible" (change)="toggleSidebar($event)" />
+                <span class="slider"></span>
+              </label>
             </div>
-        </div>
-    </mat-card-content>
-    
+            <ul class="sidebar-menu">
+              <li>Opcion 1</li>
+              <li>Opcion 2</li>
+              <li>Opcion 3</li>
+              <li>Opcion 4</li>
+              
+              <hr />
+              
+              <li>Opcion 5</li>
+              <li>Opcion 6</li>
+              <li>Opcion 7</li>
+              <li>Opcion 8</li>
 
+            </ul>
+          </aside>
+
+          <!-- FAB Buttons -->
+          <div class="fab-options">
+            <button class="fab">Vista 1</button>
+            <button class="fab">Vista 2</button>
+            <button class="fab">Vista 3</button>
+          </div>
+
+          <!-- Mapa simulado -->
+          <div class="map-background"></div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
