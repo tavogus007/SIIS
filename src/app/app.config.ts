@@ -24,6 +24,9 @@ import { FormlyConfigModule } from './formly-config.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { provideServiceWorker } from '@angular/service-worker';
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'i18n/', '.json');
@@ -31,6 +34,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(

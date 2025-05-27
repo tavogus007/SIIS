@@ -19,12 +19,16 @@
     <div class="custom-container">
       <div class="custom-div first-div">
         <div class="map-wrapper" [class.collapsed]="!sidebarVisible">
-            <!-- Sidebar -->
+          <!-- Sidebar -->
           <aside class="sidebar">
             <div class="sidebar-header">
               <span class="logo">MÉDICO EN TU CASA</span>
               <label class="toggle">
-                <input type="checkbox" [checked]="sidebarVisible" (change)="toggleSidebar($event)" />
+                <input
+                  type="checkbox"
+                  [checked]="sidebarVisible"
+                  (change)="toggleSidebar($event)"
+                />
                 <span class="slider"></span>
               </label>
             </div>
@@ -33,14 +37,13 @@
               <li>Opcion 2</li>
               <li>Opcion 3</li>
               <li>Opcion 4</li>
-              
+
               <hr />
-              
+
               <li>Opcion 5</li>
               <li>Opcion 6</li>
               <li>Opcion 7</li>
               <li>Opcion 8</li>
-
             </ul>
           </aside>
 
@@ -52,7 +55,7 @@
           </div>
 
           <!-- Mapa simulado -->
-          <div class="map-background"></div>
+          <div leaflet [leafletOptions]="mapOptions" class="map-container"></div>
         </div>
       </div>
     </div>

@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Map } from 'leaflet';
+import * as L from 'leaflet';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
-   private sidebarVisible = new BehaviorSubject<boolean>(true);
+  private sidebarVisible = new BehaviorSubject<boolean>(true);
+  private mapInstance = new BehaviorSubject<L.Map | null>(null);
+
   sidebarVisible$ = this.sidebarVisible.asObservable();
+  map$ = this.mapInstance.asObservable();
+
+  setMap(map: Map): void {
+    this.mapInstance.next(map);
+  }
 
   // Alternar visibilidad
   toggleSidebar(): void {

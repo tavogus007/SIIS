@@ -178,14 +178,9 @@
     }
   }
 
-  .map-background {
-    flex: 1;
-    background-image: url('./mapa.jpg'); // usa una imagen temporal
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(20%);
-    z-index: 1;
-    transition: margin-left 0.3s ease, width 0.3s ease;
-
-  }
+  .map-container {
+  height: 100%; // Asegura que el mapa ocupe todo el espacio
+  width: 100%;
+  z-index: 1;
+}
 }
