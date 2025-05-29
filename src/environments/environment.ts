@@ -13,6 +13,9 @@ export const environment = {
   URL_API_LOGIN: 'http://localhost:3000/autenticacion/login',
   URL_API_LOGIN_ME: 'http://172.18.2.144:3000/autenticacion/login', 
   URL_API_SOCKET: 'http://localhost:5000/',
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoidGF2b2d1czAwNyIsImEiOiJjbTkwOTgyaWkwazZlMm1uNGJudDJhemZ5In0.IgBUsceJyZmuwiieWktx3A'
+  }
 };
 
 /*

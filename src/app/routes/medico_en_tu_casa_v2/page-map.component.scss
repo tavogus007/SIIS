@@ -164,23 +164,31 @@
 }
 
 // Mapa de fondo (imagen o color sólido temporal)
-.map-wrapper {
-  position: relative;
-  width: 100%;
+#map-container {
   height: 100%;
-  display: flex;
-  transition: all 0.3s ease;
-
-  .map-wrapper.collapsed {
-    .map-background {
-      margin-left: -220px; // Ocupa el espacio dejado por el sidebar colapsado (280 - 60)
-      width: calc(100% + 220px); // Expande el mapa
-    }
-  }
-
-  .map-container {
-  height: 100%; // Asegura que el mapa ocupe todo el espacio
   width: 100%;
-  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  .mapboxgl-canvas {
+    position: absolute;
+  }
 }
+
+.map-wrapper.collapsed {
+  #map-container {
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+}
+
+.mapboxgl-ctrl-top-right {
+  top: 80px !important;
+  right: 10px !important;
+}
+
+.mapboxgl-ctrl-attrib {
+  background: rgba(255, 255, 255, 0.8) !important;
+  font-size: 10px;
 }

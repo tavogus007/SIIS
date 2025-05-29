@@ -37,4 +37,10 @@ export class AgendaServiceService {
   deleteAppointment(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+   resetFichaCounter(): void {
+    this.lastFichaId = 0;
+    localStorage.setItem('lastFichaId', '0');
+    console.log('Contador de fichas reiniciado a 0');
+  }
 }

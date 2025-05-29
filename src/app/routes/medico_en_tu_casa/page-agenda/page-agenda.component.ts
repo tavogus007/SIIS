@@ -96,6 +96,7 @@ export class PageAgendaComponent implements AfterViewInit {
         console.error('Error al obtener datos', error);
       }
     );
+    //this.agendaService.resetFichaCounter();
   }
 
   toggleMonitoreo(row: any) {

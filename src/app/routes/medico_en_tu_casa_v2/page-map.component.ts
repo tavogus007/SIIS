@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapService } from '../../services/map-service.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,11 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { AfterViewInit } from '@angular/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import * as L from 'leaflet';
-import { latLng, tileLayer, Map } from 'leaflet';
-
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'map',
@@ -33,42 +30,53 @@ import { latLng, tileLayer, Map } from 'leaflet';
   templateUrl: './page-map.component.html',
   styleUrl: './page-map.component.scss',
 })
-export class PageMapComponent implements AfterViewInit {
-  
+export class PageMapComponent implements AfterViewInit, OnDestroy {
+  sidebarVisible = true;
+  private map!: mapboxgl.Map;
+
   constructor(public mapService: MapService) {}
-   sidebarVisible = true;
-   
 
-   mapOptions: L.MapOptions = {
-    layers: [
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-      })
-    ],
-    zoom: 17,
-    center: L.latLng(-16.4955, -68.1333), // Plaza Murillo
-  };
-
-   private map!: L.Map;
-
-  // Inicializar el mapa después de la renderización
   ngAfterViewInit(): void {
-  this.mapService.map$.subscribe((map: L.Map | null) => { // Define el tipo
-    if (map) {
-      this.map = map;
+    this.mapService.initializeMap('map-container');
+    this.handleMapInstance();
+  }
+
+  private handleMapInstance(): void {
+    this.mapService.map$.subscribe(map => {
+      if (map) {
+        this.map = map;
+        this.addControls();
+      }
+    });
+  }
+
+  private addControls(): void {
+    if (this.map) {
+      // Añadir controles de navegación
+      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      
+      // Añadir atribución personalizada
+      this.map.addControl(new mapboxgl.AttributionControl({
+        compact: true,
+        customAttribution: '© Medico en tu casa V2'
+      }));
     }
-  });
-}
+  }
 
   toggleSidebar(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.sidebarVisible = checkbox.checked;
 
-    // Forzar actualización del tamaño del mapa
     setTimeout(() => {
       if (this.map) {
-        this.map.invalidateSize();
+        this.map.resize();
       }
     }, 300);
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.remove();
+    }
   }
 }

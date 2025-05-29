@@ -37,7 +37,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/leaflet/dist/leaflet.css"
+              "node_modules/mapbox-gl/dist/mapbox-gl.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
