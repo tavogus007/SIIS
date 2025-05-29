@@ -15,9 +15,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormularioComponent } from '../formulario-diag/formulario.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable } from '@angular/core';
 
 // Importa la interfaz desde el servicio
 import { AgendaServiceService, FormAmd } from './../../../services/agenda-service.service';
+import { SmartwatchService } from '../../../services/smartwatch.service';
+
+import { SmartwatchDetalleComponent } from '../smartwatch_detalle/smart-detalle.component';
+import { MatListModule } from '@angular/material/list';
+import { SmartwatchComponent } from '../smartwatch/smartwatch.component';
+
 
 @Component({
   selector: 'app-page-agenda',
@@ -36,7 +43,10 @@ import { AgendaServiceService, FormAmd } from './../../../services/agenda-servic
     MatTooltipModule,
     CommonModule,
     MatDialogModule,
+    MatButtonModule,
+    MatListModule,
   ],
+  providers: [SmartwatchService],
   templateUrl: './page-agenda.component.html',
   styleUrl: './page-agenda.component.scss',
 })
@@ -63,6 +73,7 @@ export class PageAgendaComponent implements AfterViewInit {
 
   constructor(
     private agendaService: AgendaServiceService,
+    private smartwatchService: SmartwatchService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {
@@ -99,9 +110,60 @@ export class PageAgendaComponent implements AfterViewInit {
     //this.agendaService.resetFichaCounter();
   }
 
-  toggleMonitoreo(row: any) {
-    row.age_m_a = !row.age_m_a;
-    console.log('Estado de monitoreo avanzado:', row.age_m_a);
+  async toggleMonitoreo(row: any) {
+    if (row.age_m_a) {
+      // Desactivar monitoreo
+      const confirmacion = confirm(
+        `¿Estás seguro que deseas desactivar el monitoreo avanzado para ${row.age_paciente}?`
+      );
+
+      if (confirmacion) {
+        row.age_m_a = false;
+        row.smartwatchId = null;
+        console.log('Monitoreo desactivado');
+      }
+    } else {
+      // Activar monitoreo
+      try {
+        const dispositivos = await this.smartwatchService.getSmartwatches().toPromise();
+
+        if (!dispositivos || dispositivos.length === 0) {
+          alert('No hay dispositivos disponibles');
+          return;
+        }
+
+        const dialogRef = this.dialog.open(SmartwatchComponent, {
+          data: { dispositivos },
+        });
+
+        const smartwatchId = await dialogRef.afterClosed().toPromise();
+
+        if (smartwatchId) {
+          row.age_m_a = true;
+          row.smartwatchId = smartwatchId;
+          console.log('Dispositivo vinculado:', smartwatchId);
+        }
+      } catch (error) {
+        console.error('Error al obtener dispositivos', error);
+        this.mostrarNotificacion('Error al obtener dispositivos', true);
+      }
+    }
+  }
+
+  revisarSmartwatch(row: any): void {
+    if (!row.smartwatchId) return;
+
+    this.smartwatchService.getSmartwatchDetails(row.smartwatchId).subscribe({
+      next: detalles => {
+        this.dialog.open(SmartwatchDetalleComponent, {
+          data: detalles,
+        });
+      },
+      error: err => {
+        console.error('Error obteniendo detalles', err);
+        this.mostrarNotificacion('Error al obtener detalles del dispositivo', true);
+      },
+    });
   }
 
   applyFilter(event: Event) {
@@ -123,22 +185,22 @@ export class PageAgendaComponent implements AfterViewInit {
 
   // Método de eliminación actualizado
   eliminarRegistro(row: any): void {
-  const nombrePaciente = row.age_paciente || 'esta cita';
-  const confirmacion = confirm(`¿Eliminar definitivamente la cita de ${nombrePaciente}?`);
-  
-  if (confirmacion && row.formAmdId) { 
-    this.agendaService.deleteAppointment(row.formAmdId).subscribe({
-      next: () => {
-        this.mostrarNotificacion('Cita eliminada exitosamente');
-        this.funcionListartDatos(); // Actualizar tabla
-      },
-      error: (err) => {
-        console.error('Error eliminando:', err);
-        this.mostrarNotificacion('Error al eliminar la cita', true);
-      }
-    });
+    const nombrePaciente = row.age_paciente || 'esta cita';
+    const confirmacion = confirm(`¿Eliminar definitivamente la cita de ${nombrePaciente}?`);
+
+    if (confirmacion && row.formAmdId) {
+      this.agendaService.deleteAppointment(row.formAmdId).subscribe({
+        next: () => {
+          this.mostrarNotificacion('Cita eliminada exitosamente');
+          this.funcionListartDatos(); // Actualizar tabla
+        },
+        error: err => {
+          console.error('Error eliminando:', err);
+          this.mostrarNotificacion('Error al eliminar la cita', true);
+        },
+      });
+    }
   }
-}
 
   // Método auxiliar para notificaciones
   mostrarNotificacion(mensaje: string, esError: boolean = false): void {

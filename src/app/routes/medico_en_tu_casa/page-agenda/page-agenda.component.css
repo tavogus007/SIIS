@@ -63,3 +63,23 @@
 .mat-tooltip {
   white-space: pre-line;
 }
+
+/* Añade estas reglas al final del archivo */
+
+/* Contenedor para los botones en la columna M.A. */
+.mat-column-M\.A\. .mat-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para los botones en la columna M.A. */
+.mat-column-M\.A\. button {
+  margin: 0 4px;
+}
+
+/* Ajuste para el estado activo */
+.mat-column-M\.A\. .active-state {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Datos del Smartwatch</h2>
+    <mat-dialog-content>
+      <mat-list>
+        <mat-list-item>Frecuencia Cardiaca: {{ datos.smartFrecCardiaca }} bpm</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Presión Sistólica: {{ datos.smartPresSistolica }} mmHg</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Presión Diastólica: {{ datos.smartPresDiasistolica }} mmHg</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Oxígeno en sangre: {{ datos.smartPresO2 }}%</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Temperatura: {{ datos.smartTemperatura }} °C</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Pasos: {{ datos.smartPasos }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Calorías quemadas: {{ datos.smartCaloQuem }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Horas de sueño: {{ datos.smartSleepHoras }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Nivel de estrés: {{ datos.smartNivelEstres }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Actividad física: {{ datos.smartActividadFisica }}</mat-list-item>
+      </mat-list>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+    </mat-dialog-actions>

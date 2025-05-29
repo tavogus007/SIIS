@@ -92,16 +92,31 @@
         </ng-container>
 
         <!-- Columna MONITOREO AVANZADO -->
+
         <ng-container matColumnDef="M.A.">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>MONITOREO AVANZADO</th>
           <td mat-cell *matCellDef="let row">
-            <button
-              mat-button
-              [ngStyle]="{ 'background-color': row.age_m_a ? 'green' : 'red', 'color': 'white' }"
-              (click)="toggleMonitoreo(row)"
-            >
-              {{ row.age_m_a ? 'Sí' : 'No' }}
-            </button>
+            <div *ngIf="row.age_m_a; else inactiveBlock">
+              <button
+                mat-button
+                [ngStyle]="{ 'background-color': 'green', 'color': 'white' }"
+                (click)="toggleMonitoreo(row)"
+                style="margin-right: 8px"
+              >
+                Sí
+              </button>
+
+              <button mat-button color="primary" (click)="revisarSmartwatch(row)">REVISAR</button>
+            </div>
+            <ng-template #inactiveBlock>
+              <button
+                mat-button
+                [ngStyle]="{ 'background-color': 'red', 'color': 'white' }"
+                (click)="toggleMonitoreo(row)"
+              >
+                No
+              </button>
+            </ng-template>
           </td>
         </ng-container>
 

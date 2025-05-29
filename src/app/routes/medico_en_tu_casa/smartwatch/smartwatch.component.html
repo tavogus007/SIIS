@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Vincular Smartwatch</h2>
+    <mat-dialog-content>
+      <p>Seleccione un dispositivo para vincular:</p>
+      <mat-list>
+        <mat-list-item 
+          *ngFor="let device of dispositivos" 
+          (click)="dispositivoSeleccionado = device.smartId"
+          [class.selected]="dispositivoSeleccionado === device.smartId">
+          Dispositivo ID: {{ device.smartId }}
+        </mat-list-item>
+      </mat-list>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button 
+        mat-button 
+        color="primary" 
+        [disabled]="!dispositivoSeleccionado"
+        (click)="seleccionar()">
+        Seleccionar
+      </button>
+    </mat-dialog-actions>
