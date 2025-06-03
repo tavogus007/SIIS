@@ -66,12 +66,6 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   toggleSidebar(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.sidebarVisible = checkbox.checked;
-
-    setTimeout(() => {
-      if (this.map) {
-        this.map.resize();
-      }
-    }, 300);
   }
 
   ngOnDestroy(): void {

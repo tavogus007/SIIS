@@ -17,7 +17,8 @@ export interface FormAmd {
   providedIn: 'root',
 })
 export class AgendaServiceService {
-  private apiUrl = 'http://172.18.2.144:3000/form-amd';
+  private apiUrl = 'http://localhost:3000/form-amd';
+  private pacienteUrl = 'http://localhost:3000/paciente';
   private lastFichaId = 0;
 
   constructor(private http: HttpClient) {
@@ -38,9 +39,23 @@ export class AgendaServiceService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-   resetFichaCounter(): void {
+  resetFichaCounter(): void {
     this.lastFichaId = 0;
     localStorage.setItem('lastFichaId', '0');
     console.log('Contador de fichas reiniciado a 0');
+  }
+  // Añade este método al servicio
+  getSmartwatches(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/smartwatch`);
+  }
+
+  updatePacienteSmartwatch(pacienteId: number, smartwatchId: number): Observable<any> {
+    const url = `${this.pacienteUrl}/${pacienteId}`;
+    return this.http.patch(url, { smartwatch_id: smartwatchId });
+  }
+
+  // Método para obtener el paciente por formAmdId
+  getPacienteByFormAmdId(formAmdId: number): Observable<any> {
+    return this.http.get<any>(`${this.pacienteUrl}/by-form-amd/${formAmdId}`);
   }
 }

@@ -25,7 +25,6 @@ import { SmartwatchDetalleComponent } from '../smartwatch_detalle/smart-detalle.
 import { MatListModule } from '@angular/material/list';
 import { SmartwatchComponent } from '../smartwatch/smartwatch.component';
 
-
 @Component({
   selector: 'app-page-agenda',
   standalone: true,
@@ -139,9 +138,34 @@ export class PageAgendaComponent implements AfterViewInit {
         const smartwatchId = await dialogRef.afterClosed().toPromise();
 
         if (smartwatchId) {
-          row.age_m_a = true;
-          row.smartwatchId = smartwatchId;
-          console.log('Dispositivo vinculado:', smartwatchId);
+          // Obtener el paciente asociado a este formAmdId
+          this.agendaService.getPacienteByFormAmdId(row.formAmdId).subscribe({
+            next: paciente => {
+              if (paciente && paciente.personaId) {
+                // Actualizar el smartwatch_id en el paciente
+                this.agendaService
+                  .updatePacienteSmartwatch(paciente.personaId, smartwatchId)
+                  .subscribe({
+                    next: () => {
+                      row.age_m_a = true;
+                      row.smartwatchId = smartwatchId;
+                      this.mostrarNotificacion('Dispositivo vinculado correctamente');
+                    },
+                    error: err => {
+                      console.error('Error al vincular dispositivo', err);
+                      this.mostrarNotificacion('Error al vincular dispositivo', true);
+                    },
+                  });
+              } else {
+                console.error('No se encontró paciente para este registro');
+                this.mostrarNotificacion('No se encontró paciente asociado', true);
+              }
+            },
+            error: err => {
+              console.error('Error al obtener paciente', err);
+              this.mostrarNotificacion('Error al obtener datos del paciente', true);
+            },
+          });
         }
       } catch (error) {
         console.error('Error al obtener dispositivos', error);

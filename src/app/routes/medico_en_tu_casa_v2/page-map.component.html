@@ -32,7 +32,7 @@
                 <span class="slider"></span>
               </label>
             </div>
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu" *ngIf="sidebarVisible">
               <li>Opcion 1</li>
               <li>Opcion 2</li>
               <li>Opcion 3</li>
@@ -44,6 +44,14 @@
               <li>Opcion 6</li>
               <li>Opcion 7</li>
               <li>Opcion 8</li>
+
+              <hr />
+              <li>Opcion 9</li>
+              <li>Opcion 10</li>
+              <li>Opcion 11</li>
+              <li>Opcion 12</li>
+
+
             </ul>
           </aside>
 
@@ -55,7 +63,7 @@
           </div>
 
           <!-- Mapa simulado -->
-           <div id="map-container" class="map-container"></div>
+          <div id="map-container" class="map-container"></div>
         </div>
       </div>
     </div>
