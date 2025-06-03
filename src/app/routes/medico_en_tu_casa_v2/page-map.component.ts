@@ -11,8 +11,10 @@ import { MatTableModule } from '@angular/material/table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Component, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
+import { AssignDeviceDialogComponent } from '../../shared/device-dialog/device-dialog.component';
 
 import { FormAmdService } from '../../services/form-amd.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'map',
@@ -40,9 +42,12 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   private map!: mapboxgl.Map;
   private markers: mapboxgl.Marker[] = [];
 
+   isDeviceAssigned = false;
+
   constructor(
     public mapService: MapService,
-    private formAmdService: FormAmdService
+    private formAmdService: FormAmdService,
+    private dialog: MatDialog
   ) {}
 
   ngAfterViewInit(): void {
@@ -152,5 +157,31 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     if (this.map) {
       this.map.remove();
     }
+  }
+
+  openAssignDeviceDialog(): void {
+    const dialogRef = this.dialog.open(AssignDeviceDialogComponent, {
+      width: '450px',
+      data: {
+        patientName: this.selectedLocation.formAmdNombrePaciente
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirmed') {
+        this.assignDeviceToPatient();
+      }
+    });
+  }
+
+  assignDeviceToPatient(): void {
+    // Aquí iría la lógica real para asignar el dispositivo
+    // Por ahora simulamos una operación exitosa
+    this.isDeviceAssigned = true;
+    
+    // Actualizar el estado en el backend
+    // this.formAmdService.assignDevice(this.selectedLocation.formAmdId).subscribe(...)
+    
+    console.log('Dispositivo asignado a:', this.selectedLocation.formAmdNombrePaciente);
   }
 }

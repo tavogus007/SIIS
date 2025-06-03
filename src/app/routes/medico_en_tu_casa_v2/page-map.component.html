@@ -32,98 +32,121 @@
                 <span class="slider"></span>
               </label>
             </div>
-            
+
             <!-- Panel de detalles de ubicación -->
             <div *ngIf="sidebarVisible && showLocationDetails" class="location-details">
               <button mat-icon-button class="close-button" (click)="closeLocationDetails()">
                 <mat-icon>close</mat-icon>
               </button>
-              
+
               <div *ngIf="selectedLocation">
                 <h3>{{ selectedLocation.formAmdNombrePaciente || 'Paciente' }}</h3>
-                
+
                 <div class="detail-row">
                   <mat-icon>location_on</mat-icon>
                   <div>
-                    <strong>Dirección:</strong> 
+                    <strong>Dirección:</strong>
                     {{ selectedLocation.formAmdDireccion }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>info</mat-icon>
                   <div>
-                    <strong>Motivo:</strong> 
+                    <strong>Motivo:</strong>
                     {{ selectedLocation.formAmdMotivoConsulta }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>description</mat-icon>
                   <div>
-                    <strong>Referencia:</strong> 
+                    <strong>Referencia:</strong>
                     {{ selectedLocation.formAmdNumReferencia || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>add_location</mat-icon>
                   <div>
-                    <strong>Ref. adicional:</strong> 
+                    <strong>Ref. adicional:</strong>
                     {{ selectedLocation.formAmdRefAdicional || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>attach_money</mat-icon>
                   <div>
-                    <strong>Importe:</strong> 
+                    <strong>Importe:</strong>
                     {{ selectedLocation.formAmdImporte | currency }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>payment</mat-icon>
                   <div>
-                    <strong>Método pago:</strong> 
+                    <strong>Método pago:</strong>
                     {{ selectedLocation.formAmdMetodoPago || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>person</mat-icon>
                   <div>
-                    <strong>Tipo ciudadano:</strong> 
+                    <strong>Tipo ciudadano:</strong>
                     {{ selectedLocation.formAmdTipoCiudadano || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>badge</mat-icon>
                   <div>
-                    <strong>ID ciudadano:</strong> 
+                    <strong>ID ciudadano:</strong>
                     {{ selectedLocation.formAmdIdCiudadano || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>email</mat-icon>
                   <div>
-                    <strong>Email:</strong> 
+                    <strong>Email:</strong>
                     {{ selectedLocation.formAmdEmail || 'N/A' }}
                   </div>
                 </div>
-                
+
                 <div class="detail-row">
                   <mat-icon>medical_services</mat-icon>
                   <div>
-                    <strong>Médico asignado:</strong> 
+                    <strong>Médico asignado:</strong>
                     {{ selectedLocation.formAmdMedico || 'N/A' }}
+                  </div>
+                </div>
+
+                
+                <div class="detail-row advanced-monitoring">
+                  <mat-icon>watch</mat-icon>
+                  <div>
+                    <strong>MONITOREO AVANZADO</strong>
+                    <p>¿El paciente requiere monitoreo remoto?</p>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="openAssignDeviceDialog()"
+                      [disabled]="isDeviceAssigned"
+                    >
+                      ASIGNAR DISPOSITIVO
+                    </button>
+
+                    <!-- Estado del dispositivo -->
+                    <div *ngIf="isDeviceAssigned" class="device-status">
+                      <mat-icon class="success-icon">check_circle</mat-icon>
+                      <span>Dispositivo asignado correctamente</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Menú principal (solo visible cuando no se muestra la ubicación) -->
             <ul class="sidebar-menu" *ngIf="sidebarVisible && !showLocationDetails">
               <li>Opcion 1</li>
