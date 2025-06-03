@@ -32,7 +32,100 @@
                 <span class="slider"></span>
               </label>
             </div>
-            <ul class="sidebar-menu" *ngIf="sidebarVisible">
+            
+            <!-- Panel de detalles de ubicación -->
+            <div *ngIf="sidebarVisible && showLocationDetails" class="location-details">
+              <button mat-icon-button class="close-button" (click)="closeLocationDetails()">
+                <mat-icon>close</mat-icon>
+              </button>
+              
+              <div *ngIf="selectedLocation">
+                <h3>{{ selectedLocation.formAmdNombrePaciente || 'Paciente' }}</h3>
+                
+                <div class="detail-row">
+                  <mat-icon>location_on</mat-icon>
+                  <div>
+                    <strong>Dirección:</strong> 
+                    {{ selectedLocation.formAmdDireccion }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>info</mat-icon>
+                  <div>
+                    <strong>Motivo:</strong> 
+                    {{ selectedLocation.formAmdMotivoConsulta }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>description</mat-icon>
+                  <div>
+                    <strong>Referencia:</strong> 
+                    {{ selectedLocation.formAmdNumReferencia || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>add_location</mat-icon>
+                  <div>
+                    <strong>Ref. adicional:</strong> 
+                    {{ selectedLocation.formAmdRefAdicional || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>attach_money</mat-icon>
+                  <div>
+                    <strong>Importe:</strong> 
+                    {{ selectedLocation.formAmdImporte | currency }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>payment</mat-icon>
+                  <div>
+                    <strong>Método pago:</strong> 
+                    {{ selectedLocation.formAmdMetodoPago || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>person</mat-icon>
+                  <div>
+                    <strong>Tipo ciudadano:</strong> 
+                    {{ selectedLocation.formAmdTipoCiudadano || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>badge</mat-icon>
+                  <div>
+                    <strong>ID ciudadano:</strong> 
+                    {{ selectedLocation.formAmdIdCiudadano || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>email</mat-icon>
+                  <div>
+                    <strong>Email:</strong> 
+                    {{ selectedLocation.formAmdEmail || 'N/A' }}
+                  </div>
+                </div>
+                
+                <div class="detail-row">
+                  <mat-icon>medical_services</mat-icon>
+                  <div>
+                    <strong>Médico asignado:</strong> 
+                    {{ selectedLocation.formAmdMedico || 'N/A' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Menú principal (solo visible cuando no se muestra la ubicación) -->
+            <ul class="sidebar-menu" *ngIf="sidebarVisible && !showLocationDetails">
               <li>Opcion 1</li>
               <li>Opcion 2</li>
               <li>Opcion 3</li>
@@ -50,8 +143,6 @@
               <li>Opcion 10</li>
               <li>Opcion 11</li>
               <li>Opcion 12</li>
-
-
             </ul>
           </aside>
 
@@ -62,7 +153,7 @@
             <button class="fab">Vista 3</button>
           </div>
 
-          <!-- Mapa simulado -->
+          <!-- Mapa -->
           <div id="map-container" class="map-container"></div>
         </div>
       </div>

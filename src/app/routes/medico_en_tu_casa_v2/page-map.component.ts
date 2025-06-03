@@ -31,10 +31,12 @@ import { FormAmdService } from '../../services/form-amd.service';
   ],
   templateUrl: './page-map.component.html',
   styleUrl: './page-map.component.scss',
-  providers: [FormAmdService]
+  providers: [FormAmdService],
 })
 export class PageMapComponent implements AfterViewInit, OnDestroy {
   sidebarVisible = true;
+  showLocationDetails = false; // Controla qué panel mostrar
+  selectedLocation: any = null; // Almacena la ubicación seleccionada
   private map!: mapboxgl.Map;
   private markers: mapboxgl.Marker[] = [];
 
@@ -93,10 +95,26 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
           )
           .addTo(this.map);
 
+        marker.getElement().addEventListener('click', () => {
+          this.onMarkerClick(location);
+        });
+
         this.markers.push(marker);
       }
     });
   }
+
+  onMarkerClick(location: any): void {
+    this.selectedLocation = location;
+    this.showLocationDetails = true;
+    this.sidebarVisible = true; // Asegurar que el sidebar esté visible
+  }
+
+  closeLocationDetails(): void {
+    this.showLocationDetails = false;
+    this.selectedLocation = null;
+  }
+
 
   private fitMapToMarkers(): void {
     if (this.markers.length === 0) return;
@@ -124,6 +142,10 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   toggleSidebar(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.sidebarVisible = checkbox.checked;
+
+     if (!checkbox.checked) {
+      this.closeLocationDetails();
+    }
   }
 
   ngOnDestroy(): void {
