@@ -51,8 +51,6 @@ mat-card-content {
   display: flex;
   flex-direction: column;
 
-  
-
   .sidebar-header {
     display: flex;
     justify-content: space-between;
@@ -166,13 +164,11 @@ mat-card-content {
   top: 0;
   left: 0;
   border-radius: 5px;
-  
+
   .mapboxgl-canvas {
     position: absolute;
   }
 }
-
-
 
 .mapboxgl-ctrl-top-right {
   top: 80px !important;
@@ -182,4 +178,48 @@ mat-card-content {
 .mapboxgl-ctrl-attrib {
   background: rgba(255, 255, 255, 0.8) !important;
   font-size: 10px;
+}
+
+// Añadir al final del archivo existente
+
+// Estilos para marcadores y popups
+.mapboxgl-marker {
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+
+  svg {
+    fill: #4285f4;
+  }
+}
+
+.mapboxgl-popup {
+  max-width: 300px;
+  font-family: 'Roboto', sans-serif;
+  z-index: 10;
+}
+
+.mapboxgl-popup-content {
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  strong {
+    color: #1976d2;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  small {
+    color: #666;
+    font-size: 12px;
+    display: block;
+    margin-top: 8px;
+  }
 }

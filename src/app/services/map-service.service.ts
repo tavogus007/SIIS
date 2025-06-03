@@ -11,19 +11,23 @@ export class MapService {
   sidebarVisible$ = this.sidebarVisible.asObservable();
   map$ = this.mapInstance.asObservable();
 
-  initializeMap(mapContainer: string): void {
+ initializeMap(mapContainer: string): void {
     (mapboxgl as any).accessToken = environment.mapbox.accessToken;
 
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-68.1333, -16.4955], // [lng, lat]
-      zoom: 17,
+      center: [-68.1333, -16.4955],
+      zoom: 12, // Zoom más amplio inicial
       attributionControl: false,
     });
 
-    this.mapInstance.next(map);
+    // Esperar a que el mapa esté completamente cargado
+    map.on('load', () => {
+      this.mapInstance.next(map);
+    });
   }
+
 
   toggleSidebar(): void {
     this.sidebarVisible.next(!this.sidebarVisible.value);
