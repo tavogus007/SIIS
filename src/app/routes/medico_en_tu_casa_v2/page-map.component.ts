@@ -12,6 +12,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Component, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import { AssignDeviceDialogComponent } from '../../shared/device-dialog/device-dialog.component';
+import { SelectDeviceDialogComponent } from '../../shared/select-device-dialog/select-device-dialog.component';
+import { SmartwatchDetailsComponent } from '../smartwatch-details/smartwatch-details.component';
+import { SmartwatchService } from '../../services/smartwatch.service';
 
 import { FormAmdService } from '../../services/form-amd.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,10 +33,12 @@ import { MatDialog } from '@angular/material/dialog';
     MatSortModule,
     MatTableModule,
     LeafletModule,
+    SmartwatchDetailsComponent,
+
   ],
   templateUrl: './page-map.component.html',
   styleUrl: './page-map.component.scss',
-  providers: [FormAmdService],
+  providers: [FormAmdService, SmartwatchService],
 })
 export class PageMapComponent implements AfterViewInit, OnDestroy {
   sidebarVisible = true;
@@ -41,12 +46,18 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   selectedLocation: any = null; // Almacena la ubicación seleccionada
   private map!: mapboxgl.Map;
   private markers: mapboxgl.Marker[] = [];
+  isDeviceAssigned = false;
+  selectedDeviceId: number | null = null;
 
-   isDeviceAssigned = false;
+  selectedDeviceDetails: any = null;
+
+  showSmartwatchDetails = false; // Controlar visibilidad de detalles
+  smartwatchData: any = null; // Datos del dispositivo a mostrar
 
   constructor(
     public mapService: MapService,
     private formAmdService: FormAmdService,
+    private smartwatchService: SmartwatchService,
     private dialog: MatDialog
   ) {}
 
@@ -120,7 +131,6 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     this.selectedLocation = null;
   }
 
-
   private fitMapToMarkers(): void {
     if (this.markers.length === 0) return;
 
@@ -148,7 +158,7 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     const checkbox = event.target as HTMLInputElement;
     this.sidebarVisible = checkbox.checked;
 
-     if (!checkbox.checked) {
+    if (!checkbox.checked) {
       this.closeLocationDetails();
     }
   }
@@ -163,25 +173,94 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(AssignDeviceDialogComponent, {
       width: '450px',
       data: {
-        patientName: this.selectedLocation.formAmdNombrePaciente
-      }
+        patientName: this.selectedLocation.formAmdNombrePaciente,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirmed') {
-        this.assignDeviceToPatient();
+        this.showDeviceSelection();
       }
     });
   }
 
-  assignDeviceToPatient(): void {
-    // Aquí iría la lógica real para asignar el dispositivo
-    // Por ahora simulamos una operación exitosa
+  assignDeviceToPatient(device: any): void {
+    this.selectedDeviceId = device.smartId;
+    this.selectedDeviceDetails = device;
     this.isDeviceAssigned = true;
-    
-    // Actualizar el estado en el backend
-    // this.formAmdService.assignDevice(this.selectedLocation.formAmdId).subscribe(...)
-    
-    console.log('Dispositivo asignado a:', this.selectedLocation.formAmdNombrePaciente);
+
+    console.log('Dispositivo asignado:', this.selectedDeviceId);
+    console.log('Detalles del dispositivo:', device);
+  }
+
+  inspectDevice(): void {
+    if (this.selectedDeviceDetails) {
+      this.showSmartwatchDetails = true;
+      this.smartwatchData = this.selectedDeviceDetails;
+    }
+  }
+
+  closeSmartwatchView(): void {
+  this.showSmartwatchDetails = false;
+  this.smartwatchData = null;
+  
+  // Redibujar el mapa al volver
+  setTimeout(() => {
+    if (this.map) {
+      this.map.resize();
+    }
+  }, 100);
+}
+
+  removeDevice(): void {
+    if (this.selectedDeviceId) {
+      // Confirmar retiro
+      if (confirm('¿Estás seguro de retirar este dispositivo del paciente?')) {
+        // Lógica para retirar el dispositivo (desasignar)
+        // this.smartwatchService.unassignDevice(this.selectedLocation.formAmdId, this.selectedDeviceId).subscribe(...);
+
+        // Resetear estado
+        this.isDeviceAssigned = false;
+        this.selectedDeviceId = null;
+        this.selectedDeviceDetails = null;
+
+        console.log('Dispositivo retirado');
+      }
+    }
+  }
+
+  showDeviceSelection(): void {
+    // Obtener dispositivos disponibles del backend
+    this.smartwatchService.getSmartwatches().subscribe({
+      next: devices => {
+        this.openDeviceSelectionDialog(devices);
+      },
+      error: err => {
+        console.error('Error obteniendo dispositivos:', err);
+        // Manejar error apropiadamente
+      },
+    });
+  }
+
+  openDeviceSelectionDialog(devices: any[]): void {
+    const dialogRef = this.dialog.open(SelectDeviceDialogComponent, {
+      width: '500px',
+      data: {
+        devices: devices,
+        patientName: this.selectedLocation.formAmdNombrePaciente,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(selectedDevice => {
+      if (selectedDevice) {
+        this.assignDeviceToPatient(selectedDevice);
+      }
+    });
+  }
+
+  reviewDevice(): void {
+    if (this.selectedDeviceId) {
+      console.log('Revisando dispositivo:', this.selectedDeviceId);
+    }
   }
 }

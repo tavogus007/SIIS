@@ -290,30 +290,137 @@ mat-card-content {
   border-radius: 8px;
   padding: 15px;
   margin-top: 20px;
-  border-left: 4px solid #4285F4;
-  
+  border-left: 4px solid #4285f4;
+
   p {
     margin: 10px 0;
     font-size: 15px;
   }
-  
+
   button {
     margin-top: 5px;
+  }
+
+  .device-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+
+    button {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      font-weight: 500;
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+
+    .inspect-btn {
+      background-color: #1976d2;
+      color: white;
+    }
+
+    .remove-btn {
+      background-color: #d32f2f;
+      color: white;
+    }
   }
 }
 
 .device-status {
   display: flex;
   align-items: center;
-  margin-top: 15px;
-  padding: 10px;
+  margin-bottom: 15px;
+  padding: 12px;
   background-color: #e8f5e9;
-  border-radius: 4px;
-  
+  border-radius: 6px;
+  font-weight: 500;
+
   .success-icon {
     color: #4caf50;
     margin-right: 10px;
+    font-size: 24px;
   }
+}
+
+.device-details {
+  padding: 15px;
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  margin-top: 10px;
+
+  p {
+    margin: 8px 0;
+  }
+
+  .review-button {
+    margin-top: 10px;
+    background-color: #1976d2;
+    color: white;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.assigned-device {
+  margin-top: 15px;
+}
+
+.device-selection {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f0f7ff;
+  border-radius: 8px;
+
+  p {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #1976d2;
+    color: white;
+  }
+}
+
+.device-actions {
+  display: flex;
+  gap: 15px;
+
+  button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    font-weight: 500;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.map-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 280px;
+  /* ... estilos existentes ... */
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+  height: 100%;
 }
 
 // Ajustar el menú principal

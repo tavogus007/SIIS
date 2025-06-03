@@ -122,25 +122,41 @@
                   </div>
                 </div>
 
-                
                 <div class="detail-row advanced-monitoring">
                   <mat-icon>watch</mat-icon>
                   <div>
                     <strong>MONITOREO AVANZADO</strong>
-                    <p>¿El paciente requiere monitoreo remoto?</p>
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      (click)="openAssignDeviceDialog()"
-                      [disabled]="isDeviceAssigned"
-                    >
-                      ASIGNAR DISPOSITIVO
-                    </button>
 
-                    <!-- Estado del dispositivo -->
-                    <div *ngIf="isDeviceAssigned" class="device-status">
-                      <mat-icon class="success-icon">check_circle</mat-icon>
-                      <span>Dispositivo asignado correctamente</span>
+                    <div *ngIf="!isDeviceAssigned">
+                      <p>¿El paciente requiere monitoreo remoto?</p>
+                      <button mat-raised-button color="primary" (click)="openAssignDeviceDialog()">
+                        ASIGNAR DISPOSITIVO
+                      </button>
+                    </div>
+
+                    <div *ngIf="isDeviceAssigned" class="assigned-device">
+                      <div class="device-status">
+                        <mat-icon class="success-icon">check_circle</mat-icon>
+                        <span>Dispositivo asignado correctamente</span>
+                      </div>
+
+                      <div class="device-info">
+                        <p>
+                          Dispositivo seleccionado: <strong>ID {{ selectedDeviceId }}</strong>
+                        </p>
+
+                        <div class="device-actions">
+                          <button mat-raised-button class="inspect-btn" (click)="inspectDevice()">
+                            <mat-icon>visibility</mat-icon>
+                            INSPECCIONAR
+                          </button>
+
+                          <button mat-raised-button class="remove-btn" (click)="removeDevice()">
+                            <mat-icon>remove_circle</mat-icon>
+                            RETIRAR DISPOSITIVO
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -169,15 +185,28 @@
             </ul>
           </aside>
 
-          <!-- FAB Buttons -->
-          <div class="fab-options">
-            <button class="fab">Vista 1</button>
-            <button class="fab">Vista 2</button>
-            <button class="fab">Vista 3</button>
-          </div>
+          <div class="main-content">
+            <!-- Mostrar mapa cuando no se están viendo detalles -->
+            <div id="map-container" class="map-container" *ngIf="!showSmartwatchDetails"></div>
 
-          <!-- Mapa -->
-          <div id="map-container" class="map-container"></div>
+            <!-- Mostrar detalles del smartwatch cuando está activo -->
+            <app-smartwatch-details
+              *ngIf="showSmartwatchDetails"
+              [deviceData]="smartwatchData"
+              (close)="closeSmartwatchView()"
+              class="smartwatch-view"
+            >
+            </app-smartwatch-details>
+
+            <!-- FAB Buttons -->
+            <div class="fab-options">
+              <button class="fab">Vista 1</button>
+              <button class="fab">Vista 2</button>
+              <button class="fab">Vista 3</button>
+            </div>
+
+        
+          </div>
         </div>
       </div>
     </div>

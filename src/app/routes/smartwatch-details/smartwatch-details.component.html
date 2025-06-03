@@ -1,0 +1,109 @@
+<div class="smartwatch-details-container">
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>Detalles del Dispositivo Smartwatch</mat-card-title>
+      <mat-card-subtitle>ID: {{ deviceData.smartId }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onClose()">
+        <mat-icon>arrow_back</mat-icon>
+        VOLVER AL MAPA
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <div class="metrics-grid">
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">favorite</mat-icon>
+        <mat-card-title>Frecuencia Cardíaca</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartFrecCardiaca }} bpm</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">bloodtype</mat-icon>
+        <mat-card-title>Presión Arterial</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">
+          {{ deviceData.smartPresSistolica }}/{{ deviceData.smartPresDiasistolica }} mmHg
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">air</mat-icon>
+        <mat-card-title>Oxígeno en Sangre</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartPresO2 }}%</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">thermostat</mat-icon>
+        <mat-card-title>Temperatura</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartTemperatura }}°C</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">directions_walk</mat-icon>
+        <mat-card-title>Pasos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartPasos }}</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">whatshot</mat-icon>
+        <mat-card-title>Calorías Quemadas</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartCaloQuem }} kcal</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">hotel</mat-icon>
+        <mat-card-title>Horas de Sueño</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartSleepHoras }} horas</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">mood</mat-icon>
+        <mat-card-title>Nivel de Estrés</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartNivelEstres }}</div>
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="metric-card">
+      <mat-card-header>
+        <mat-icon class="metric-icon">directions_run</mat-icon>
+        <mat-card-title>Actividad Física</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="metric-value">{{ deviceData.smartActividadFisica }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

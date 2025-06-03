@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Asignar dispositivo</h2>
+<mat-dialog-content>
+  <p>Seleccione un dispositivo smartwatch para asignar al paciente <strong>{{ data.patientName }}</strong></p>
+  
+  <mat-selection-list [multiple]="false" [(ngModel)]="selectedDevice">
+    <mat-list-option *ngFor="let device of data.devices" [value]="device">
+      <div class="device-option">
+        <mat-icon class="device-icon">watch</mat-icon>
+        <div>
+          <strong>Dispositivo ID: {{ device.smartId }}</strong>
+          <div class="device-info">
+            <span>Último registro: {{ device.smartRegistrado | date:'short' }}</span>
+            <span>Estado: {{ device.smartEstado === 1 ? 'Activo' : 'Inactivo' }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button 
+          color="primary" 
+          [disabled]="!selectedDevice"
+          (click)="onAssignClick()">
+    ASIGNAR DISPOSITIVO
+  </button>
+</mat-dialog-actions>
