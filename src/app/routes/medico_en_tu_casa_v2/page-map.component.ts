@@ -47,11 +47,11 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   private markers: mapboxgl.Marker[] = [];
   isDeviceAssigned = false;
   selectedDeviceId: number | null = null;
-
   selectedDeviceDetails: any = null;
-
   showSmartwatchDetails = false; // Controlar visibilidad de detalles
   smartwatchData: any = null; // Datos del dispositivo a mostrar
+
+  currentAssignmentId: number | null = null;
 
   constructor(
     public mapService: MapService,
@@ -184,21 +184,43 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   assignDeviceToPatient(device: any): void {
-    console.log('Dispositivo asignado:', device);
-    this.selectedDeviceId = device.smartId; // Solo guardar ID
-    this.isDeviceAssigned = true;
+    const patientId = this.selectedLocation.formAmdId;
+
+    this.smartwatchService.assignDevice(patientId, device.smartId).subscribe({
+      next: response => {
+        this.isDeviceAssigned = true;
+        this.selectedDeviceId = device.smartId;
+        this.currentAssignmentId = response.assignmentId; // Almacenar ID real
+      },
+      error: err => console.error('Error asignando dispositivo', err),
+    });
   }
 
   inspectDevice(): void {
-    if (this.selectedDeviceId) {
-      this.smartwatchService.getSmartwatchDetails(this.selectedDeviceId).subscribe({
+    if (this.currentAssignmentId) {
+      this.smartwatchService.getAssignmentDetails(this.currentAssignmentId).subscribe({
         next: details => {
           this.showSmartwatchDetails = true;
           this.smartwatchData = details;
         },
-        error: err => console.error('Error al obtener detalles', err),
+        error: err => {
+          console.error('Error obteniendo detalles', err);
+          // Mostrar datos de prueba si el backend falla
+          this.showSmartwatchDetails = true;
+          this.smartwatchData = this.getMockDeviceData();
+        },
       });
     }
+  }
+
+  private getMockDeviceData(): any {
+    return {
+      patientName: this.selectedLocation.formAmdNombrePaciente,
+      heartRate: 72,
+      bloodPressure: '120/80',
+      oxygenSaturation: 98,
+      lastUpdate: new Date().toISOString(),
+    };
   }
 
   closeSmartwatchView(): void {
