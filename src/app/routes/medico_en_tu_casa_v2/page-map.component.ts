@@ -34,7 +34,6 @@ import { MatDialog } from '@angular/material/dialog';
     MatTableModule,
     LeafletModule,
     SmartwatchDetailsComponent,
-
   ],
   templateUrl: './page-map.component.html',
   styleUrl: './page-map.component.scss',
@@ -185,48 +184,81 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   assignDeviceToPatient(device: any): void {
-    this.selectedDeviceId = device.smartId;
-    this.selectedDeviceDetails = device;
+    console.log('Dispositivo asignado:', device);
+    this.selectedDeviceId = device.smartId; // Solo guardar ID
     this.isDeviceAssigned = true;
-
-    console.log('Dispositivo asignado:', this.selectedDeviceId);
-    console.log('Detalles del dispositivo:', device);
   }
 
   inspectDevice(): void {
-    if (this.selectedDeviceDetails) {
-      this.showSmartwatchDetails = true;
-      this.smartwatchData = this.selectedDeviceDetails;
+    if (this.selectedDeviceId) {
+      this.smartwatchService.getSmartwatchDetails(this.selectedDeviceId).subscribe({
+        next: details => {
+          this.showSmartwatchDetails = true;
+          this.smartwatchData = details;
+        },
+        error: err => console.error('Error al obtener detalles', err),
+      });
     }
   }
 
   closeSmartwatchView(): void {
-  this.showSmartwatchDetails = false;
-  this.smartwatchData = null;
-  
-  // Redibujar el mapa al volver
-  setTimeout(() => {
-    if (this.map) {
-      this.map.resize();
-    }
-  }, 100);
-}
+    this.showSmartwatchDetails = false;
+    this.smartwatchData = null;
 
-  removeDevice(): void {
-    if (this.selectedDeviceId) {
-      // Confirmar retiro
-      if (confirm('¿Estás seguro de retirar este dispositivo del paciente?')) {
-        // Lógica para retirar el dispositivo (desasignar)
-        // this.smartwatchService.unassignDevice(this.selectedLocation.formAmdId, this.selectedDeviceId).subscribe(...);
-
-        // Resetear estado
-        this.isDeviceAssigned = false;
-        this.selectedDeviceId = null;
-        this.selectedDeviceDetails = null;
-
-        console.log('Dispositivo retirado');
+    // Redibujar el mapa al volver
+    setTimeout(() => {
+      if (this.map) {
+        this.map.resize();
       }
+    }, 100);
+  }
+
+  // En page-map.component.ts
+  removeDevice(): void {
+    console.log('boton clickeado');
+    console.log('selectedDeviceId:', this.selectedDeviceId);
+    console.log('selectedLocation:', this.selectedLocation);
+
+    // Verifica que tenemos los IDs necesarios
+    if (!this.selectedLocation?.formAmdId || !this.selectedDeviceId) {
+      console.error('Faltan datos para retirar el dispositivo');
+      return;
     }
+
+    const confirmation = confirm('¿Estás seguro de retirar este dispositivo del paciente?');
+
+    if (confirmation) {
+      // 1. Crear un ID único para la asignación (depende de tu lógica)
+      const assignmentId = this.generateAssignmentId(); // ¡Implementa esta función!
+
+      // 2. Llamar al servicio con el ID de asignación
+      this.smartwatchService.unassignDevice(assignmentId).subscribe({
+        next: () => {
+          this.isDeviceAssigned = false;
+          this.selectedDeviceId = null;
+          this.selectedDeviceDetails = null;
+          this.closeSmartwatchView();
+          console.log('Dispositivo retirado correctamente');
+          this.loadLocations();
+        },
+        error: err => {
+          console.error('Error al retirar dispositivo:', err);
+          alert('No se pudo retirar el dispositivo: ' + err.message);
+        },
+      });
+    }
+  }
+
+  private generateAssignmentId(): number {
+    // Esto es un ejemplo - ajusta según tu lógica real
+    if (
+      !this.selectedLocation ||
+      this.selectedLocation.formAmdId == null ||
+      this.selectedDeviceId == null
+    ) {
+      throw new Error('Datos insuficientes para generar el ID de asignación');
+    }
+    return this.selectedLocation.formAmdId * 1000 + this.selectedDeviceId;
   }
 
   showDeviceSelection(): void {
@@ -246,7 +278,7 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(SelectDeviceDialogComponent, {
       width: '500px',
       data: {
-        devices: devices,
+        devices,
         patientName: this.selectedLocation.formAmdNombrePaciente,
       },
     });

@@ -15,7 +15,10 @@ export class SmartwatchDetailsComponent {
   @Input() deviceData: any;
   @Output() close = new EventEmitter<void>();
 
+  
   onClose(): void {
     this.close.emit();
   }
+
+  
 }

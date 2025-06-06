@@ -17,8 +17,8 @@ export interface FormAmd {
   providedIn: 'root',
 })
 export class AgendaServiceService {
-  private apiUrl = 'http://localhost:3000/form-amd';
-  private pacienteUrl = 'http://localhost:3000/paciente';
+  private apiUrl = 'http://172.18.2.144:3000/form-amd';
+  private pacienteUrl = 'http://172.18.2.144:3000/paciente';
   private lastFichaId = 0;
 
   constructor(private http: HttpClient) {

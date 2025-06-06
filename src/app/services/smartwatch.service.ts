@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SmartwatchService {
   private apiUrl = `${environment.apiUrl}/smartwatch`;
@@ -18,4 +18,8 @@ export class SmartwatchService {
   getSmartwatchDetails(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+
+  unassignDevice(assignmentId: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${assignmentId}`);
+}
 }
