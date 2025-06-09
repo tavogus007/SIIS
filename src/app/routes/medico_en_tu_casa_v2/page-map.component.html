@@ -151,10 +151,10 @@
                             INSPECCIONAR
                           </button>
 
-                          <button mat-raised-button class="remove-btn" (click)="removeDevice()">
-                            <mat-icon>remove_circle</mat-icon>
+                          <!-- <button mat-raised-button color="warn" (click)="removeDevice()">
+                            <mat-icon>phonelink_erase</mat-icon>
                             RETIRAR DISPOSITIVO
-                          </button>
+                          </button> -->
                         </div>
                       </div>
                     </div>
@@ -186,26 +186,16 @@
           </aside>
 
           <div class="main-content">
-            <!-- Mostrar mapa cuando no se están viendo detalles -->
+            <!-- Contenedor del mapa - visible solo cuando NO se muestran detalles -->
             <div id="map-container" class="map-container" *ngIf="!showSmartwatchDetails"></div>
 
-            <!-- Mostrar detalles del smartwatch cuando está activo -->
+            <!-- Componente de detalles - visible solo cuando showSmartwatchDetails es true -->
             <app-smartwatch-details
               *ngIf="showSmartwatchDetails"
               [deviceData]="smartwatchData"
               (close)="closeSmartwatchView()"
               class="smartwatch-view"
-            >
-            </app-smartwatch-details>
-
-            <!-- FAB Buttons -->
-            <div class="fab-options">
-              <button class="fab">Vista 1</button>
-              <button class="fab">Vista 2</button>
-              <button class="fab">Vista 3</button>
-            </div>
-
-        
+            ></app-smartwatch-details>
           </div>
         </div>
       </div>

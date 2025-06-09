@@ -7,33 +7,33 @@
 
 .header-card {
   margin-bottom: 25px;
-  background-color: #4285F4;
+  background-color: #4285f4;
   color: white;
-  
+
   mat-card-header {
     padding: 16px;
-    
+
     mat-card-title {
       font-size: 24px;
       font-weight: 500;
     }
-    
+
     mat-card-subtitle {
       color: rgba(255, 255, 255, 0.8);
       font-size: 16px;
     }
   }
-  
+
   mat-card-actions {
     padding: 0 16px 16px;
-    
+
     button {
       background-color: white;
-      color: #4285F4;
+      color: #4285f4;
       font-weight: 500;
-      
+
       mat-icon {
-        margin-right: 8px;
+        margin-right: 4px;
       }
     }
   }
@@ -49,29 +49,31 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
   }
-  
+
   mat-card-header {
     padding: 16px 16px 0;
-    
+
     .metric-icon {
       font-size: 36px;
-      margin-right: 10px;
-      color: #4285F4;
+      width: 40px;
+      height: 30px;
+      margin-right: 40px;
+      color: #4285f4;
     }
-    
+
     mat-card-title {
       font-size: 18px;
       font-weight: 500;
     }
   }
-  
+
   mat-card-content {
     padding: 0 16px 16px;
-    
+
     .metric-value {
       font-size: 24px;
       font-weight: 600;

@@ -61,6 +61,14 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit(): void {
+    this.initializeMap();
+  }
+
+  private initializeMap(): void {
+    // Limpiar mapa existente
+    this.destroyMap();
+
+    // Inicializar nuevo mapa
     this.mapService.initializeMap('map-container');
     this.handleMapInstance();
   }
@@ -184,13 +192,16 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   assignDeviceToPatient(device: any): void {
+    console.log('Dispositivo seleccionado:', device); // Añade esto para depurar
     const patientId = this.selectedLocation.formAmdId;
+    const deviceId = device.id || device.smartId || device.deviceId; // Múltiples posibilidades
 
     this.smartwatchService.assignDevice(patientId, device.smartId).subscribe({
       next: response => {
         this.isDeviceAssigned = true;
-        this.selectedDeviceId = device.smartId;
+        this.selectedDeviceId = deviceId;
         this.currentAssignmentId = response.assignmentId; // Almacenar ID real
+        //this.selectedLocation.deviceId = device.smartId;
       },
       error: err => console.error('Error asignando dispositivo', err),
     });
@@ -227,41 +238,48 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
     this.showSmartwatchDetails = false;
     this.smartwatchData = null;
 
-    // Redibujar el mapa al volver
-    setTimeout(() => {
-      if (this.map) {
-        this.map.resize();
-      }
-    }, 100);
+    // Inicializar el mapa después de que Angular haya actualizado la vista
+    setTimeout(() => this.initializeMap(), 50);
   }
 
-  // En page-map.component.ts
-  removeDevice(): void {
-    console.log('boton clickeado');
-    console.log('selectedDeviceId:', this.selectedDeviceId);
-    console.log('selectedLocation:', this.selectedLocation);
+  private destroyMap(): void {
+    // Limpiar marcadores
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
 
-    // Verifica que tenemos los IDs necesarios
+    // Destruir el mapa
+    if (this.map) {
+      this.map.remove();
+      this.map = null as any; // Asegurar que el mapa se reinicie
+    }
+  }
+
+  removeDevice(): void {
+    console.log('Botón retirar clickeado');
+
+    // Verificar que tenemos los datos necesarios
     if (!this.selectedLocation?.formAmdId || !this.selectedDeviceId) {
       console.error('Faltan datos para retirar el dispositivo');
+      console.log('selectedDeviceId:', this.selectedDeviceId);
+      console.log('selectedLocation:', this.selectedLocation);
       return;
     }
 
     const confirmation = confirm('¿Estás seguro de retirar este dispositivo del paciente?');
 
     if (confirmation) {
-      // 1. Crear un ID único para la asignación (depende de tu lógica)
-      const assignmentId = this.generateAssignmentId(); // ¡Implementa esta función!
-
-      // 2. Llamar al servicio con el ID de asignación
-      this.smartwatchService.unassignDevice(assignmentId).subscribe({
+      // Usar el ID real de asignación
+      this.smartwatchService.unassignDevice(this.currentAssignmentId!).subscribe({
         next: () => {
+          // Resetear estado
           this.isDeviceAssigned = false;
           this.selectedDeviceId = null;
-          this.selectedDeviceDetails = null;
-          this.closeSmartwatchView();
+          this.currentAssignmentId = null;
+
           console.log('Dispositivo retirado correctamente');
-          this.loadLocations();
+
+          // Actualizar la interfaz
+          this.loadLocations(); // Recargar marcadores
         },
         error: err => {
           console.error('Error al retirar dispositivo:', err);
