@@ -45,8 +45,8 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   selectedLocation: any = null; // Almacena la ubicación seleccionada
   private map!: mapboxgl.Map;
   private markers: mapboxgl.Marker[] = [];
-  isDeviceAssigned = false;
-  selectedDeviceId: number | null = null;
+  // isDeviceAssigned = false;
+  // selectedDeviceId: number | null = null;
   selectedDeviceDetails: any = null;
   showSmartwatchDetails = false; // Controlar visibilidad de detalles
   smartwatchData: any = null; // Datos del dispositivo a mostrar
@@ -86,6 +86,12 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   private loadLocations(): void {
     this.formAmdService.getLocations().subscribe({
       next: locations => {
+        // Inicializar estado de dispositivo para cada ubicación
+        locations.forEach(location => {
+          location.isDeviceAssigned = location.isDeviceAssigned || false;
+          location.assignedDeviceId = location.assignedDeviceId || null;
+          location.assignmentId = location.assignmentId || null;
+        });
         this.addMarkers(locations);
         this.fitMapToMarkers();
       },
@@ -192,31 +198,29 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   assignDeviceToPatient(device: any): void {
-    console.log('Dispositivo seleccionado:', device); // Añade esto para depurar
     const patientId = this.selectedLocation.formAmdId;
-    const deviceId = device.id || device.smartId || device.deviceId; // Múltiples posibilidades
+    const deviceId = device.id || device.smartId || device.deviceId;
 
     this.smartwatchService.assignDevice(patientId, device.smartId).subscribe({
       next: response => {
-        this.isDeviceAssigned = true;
-        this.selectedDeviceId = deviceId;
-        this.currentAssignmentId = response.assignmentId; // Almacenar ID real
-        //this.selectedLocation.deviceId = device.smartId;
+        // Actualizar SOLO la ubicación seleccionada
+        this.selectedLocation.isDeviceAssigned = true;
+        this.selectedLocation.assignedDeviceId = deviceId;
+        this.selectedLocation.assignmentId = response.assignmentId;
       },
       error: err => console.error('Error asignando dispositivo', err),
     });
   }
 
   inspectDevice(): void {
-    if (this.currentAssignmentId) {
-      this.smartwatchService.getAssignmentDetails(this.currentAssignmentId).subscribe({
+    if (this.selectedLocation.assignmentId) {
+      this.smartwatchService.getAssignmentDetails(this.selectedLocation.assignmentId).subscribe({
         next: details => {
           this.showSmartwatchDetails = true;
           this.smartwatchData = details;
         },
         error: err => {
           console.error('Error obteniendo detalles', err);
-          // Mostrar datos de prueba si el backend falla
           this.showSmartwatchDetails = true;
           this.smartwatchData = this.getMockDeviceData();
         },
@@ -255,51 +259,24 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   removeDevice(): void {
-    console.log('Botón retirar clickeado');
-
-    // Verificar que tenemos los datos necesarios
-    if (!this.selectedLocation?.formAmdId || !this.selectedDeviceId) {
-      console.error('Faltan datos para retirar el dispositivo');
-      console.log('selectedDeviceId:', this.selectedDeviceId);
-      console.log('selectedLocation:', this.selectedLocation);
-      return;
-    }
-
+    if (!this.selectedLocation?.assignmentId) return;
+    
     const confirmation = confirm('¿Estás seguro de retirar este dispositivo del paciente?');
-
     if (confirmation) {
-      // Usar el ID real de asignación
-      this.smartwatchService.unassignDevice(this.currentAssignmentId!).subscribe({
+      this.smartwatchService.unassignDevice(this.selectedLocation.assignmentId).subscribe({
         next: () => {
-          // Resetear estado
-          this.isDeviceAssigned = false;
-          this.selectedDeviceId = null;
-          this.currentAssignmentId = null;
-
-          console.log('Dispositivo retirado correctamente');
-
-          // Actualizar la interfaz
-          this.loadLocations(); // Recargar marcadores
+          // Resetear estado SOLO para esta ubicación
+          this.selectedLocation.isDeviceAssigned = false;
+          this.selectedLocation.assignedDeviceId = null;
+          this.selectedLocation.assignmentId = null;
         },
-        error: err => {
-          console.error('Error al retirar dispositivo:', err);
-          alert('No se pudo retirar el dispositivo: ' + err.message);
-        },
+        error: err => console.error('Error al retirar dispositivo:', err),
       });
     }
   }
 
-  private generateAssignmentId(): number {
-    // Esto es un ejemplo - ajusta según tu lógica real
-    if (
-      !this.selectedLocation ||
-      this.selectedLocation.formAmdId == null ||
-      this.selectedDeviceId == null
-    ) {
-      throw new Error('Datos insuficientes para generar el ID de asignación');
-    }
-    return this.selectedLocation.formAmdId * 1000 + this.selectedDeviceId;
-  }
+
+  
 
   showDeviceSelection(): void {
     // Obtener dispositivos disponibles del backend
@@ -331,8 +308,8 @@ export class PageMapComponent implements AfterViewInit, OnDestroy {
   }
 
   reviewDevice(): void {
-    if (this.selectedDeviceId) {
-      console.log('Revisando dispositivo:', this.selectedDeviceId);
-    }
+  if (this.selectedLocation?.assignedDeviceId) {
+    console.log('Revisando dispositivo:', this.selectedLocation.assignedDeviceId);
   }
+}
 }

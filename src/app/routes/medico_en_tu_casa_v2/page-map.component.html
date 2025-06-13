@@ -127,14 +127,14 @@
                   <div>
                     <strong>MONITOREO AVANZADO</strong>
 
-                    <div *ngIf="!isDeviceAssigned">
+                    <div *ngIf="!selectedLocation.isDeviceAssigned">
                       <p>¿El paciente requiere monitoreo remoto?</p>
                       <button mat-raised-button color="primary" (click)="openAssignDeviceDialog()">
                         ASIGNAR DISPOSITIVO
                       </button>
                     </div>
 
-                    <div *ngIf="isDeviceAssigned" class="assigned-device">
+                    <div *ngIf="selectedLocation.isDeviceAssigned" class="assigned-device">
                       <div class="device-status">
                         <mat-icon class="success-icon">check_circle</mat-icon>
                         <span>Dispositivo asignado correctamente</span>
@@ -142,7 +142,7 @@
 
                       <div class="device-info">
                         <p>
-                          Dispositivo seleccionado: <strong>ID {{ selectedDeviceId }}</strong>
+                          Dispositivo seleccionado: <strong>ID {{ selectedLocation.assignedDeviceId }}</strong>
                         </p>
 
                         <div class="device-actions">
