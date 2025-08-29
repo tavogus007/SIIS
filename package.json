@@ -52,7 +52,7 @@
     "apexcharts": "^3.51.0",
     "moment": "^2.30.0",
     "ngx-permissions": "^17.1.0",
-    "ngx-progressbar": "^11.1.0",
+    "ngx-progressbar": "^14.0.0",
     "ngx-skeleton-loader": "^9.0.0",
     "ngx-socket-io": "^4.7.0",
     "ngx-spinner": "^17.0.0",
